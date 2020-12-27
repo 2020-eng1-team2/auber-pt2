@@ -8,9 +8,4 @@ public class TestTest {
     public void testyTestTest() {
         assertEquals(1, 1);
     }
-
-    @Test
-    public void testFailingTest() {
-        assertEquals(1, 2);
-    }
 }
