@@ -28,7 +28,7 @@ public abstract class Npc extends GameEntity {
   private Vector2 targetDirection = new Vector2();
   private NavigationMesh navigationMesh;
 
-  protected float maxSpeed = 1.3f;
+  protected float maxSpeed = 0.8f;
 
   private static String[] textureNames = {"alienA", "alienB", "alienC"};
 
