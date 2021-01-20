@@ -192,7 +192,7 @@ public class Player extends GameEntity {
       rayRenderer.setProjectionMatrix(camera.combined);
       rayRenderer.begin(ShapeType.Filled);
       rayRenderer.rectLine(getCenterX(), getCenterY(),
-          teleporterRayCoordinates.x, teleporterRayCoordinates.y, 0.5f,
+          teleporterRayCoordinates.x, teleporterRayCoordinates.y, 4f,
           World.rayColorA, World.rayColorB);
       rayRenderer.end();
 
