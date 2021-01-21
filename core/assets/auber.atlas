@@ -55,7 +55,7 @@ demoButton
   index: -1
 infiltrator
   rotate: false
-  xy: 1320, 304
+  xy: 456, 88
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -74,9 +74,16 @@ map_mask
   orig: 200, 200
   offset: 0, 0
   index: -1
+minimapTexture
+  rotate: false
+  xy: 1168, 134
+  size: 184, 184
+  orig: 184, 184
+  offset: 0, 0
+  index: -1
 placeholder
   rotate: false
-  xy: 1168, 218
+  xy: 304, 2
   size: 150, 100
   orig: 150, 100
   offset: 0, 0
@@ -90,7 +97,7 @@ playButton
   index: -1
 player
   rotate: false
-  xy: 304, 88
+  xy: 1354, 304
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -107,18 +114,5 @@ stars
   xy: 2, 965
   size: 1920, 1080
   orig: 1920, 1080
-  offset: 0, 0
-  index: -1
-
-auber2.png
-size: 1024,1024
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-minimapTexture
-  rotate: false
-  xy: 2, 2
-  size: 736, 736
-  orig: 736, 736
   offset: 0, 0
   index: -1

@@ -3,6 +3,7 @@ package com.threecubed.auber.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -34,6 +35,7 @@ public class GameUi {
   private Sprite miniMapSprite;
   private Sprite maskSprite;
   private float MINIMAP_SCALE_FACTOR = 1f;
+  private Vector2 minimapOffset = new Vector2(150f, 150f);
   private Color blindedColor = new Color(0f, 0f, 0f, 1f);
 
   private BitmapFont uiFont = new BitmapFont();
@@ -184,19 +186,15 @@ public class GameUi {
     screenBatch.end();
   }
 
-  // TODO: Finish minimap, need to insert new textures first
+  // TODO: Finish minimap
   private void drawMinimap(World world, SpriteBatch screenBatch){
     screenBatch.begin();
     miniMapSprite.setPosition(
-            Gdx.graphics.getWidth() - (miniMapSprite.getWidth() * MINIMAP_SCALE_FACTOR),
-            Gdx.graphics.getHeight() - (miniMapSprite.getHeight() * MINIMAP_SCALE_FACTOR)
+            Gdx.graphics.getWidth() - miniMapSprite.getWidth() - minimapOffset.x,
+            Gdx.graphics.getHeight() - miniMapSprite.getHeight() - minimapOffset.y
     );
     miniMapSprite.draw(screenBatch);
-    maskSprite.setPosition(
-            Gdx.graphics.getWidth() - maskSprite.getWidth(),
-            Gdx.graphics.getHeight() - maskSprite.getHeight()
-    );
-    maskSprite.draw(screenBatch);
+    // TODO: Draw play indicatior
     screenBatch.end();
   }
 }
