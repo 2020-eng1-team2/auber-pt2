@@ -158,7 +158,8 @@ public class World {
   /** The speed at which infiltrator projectiles should travel. */
   public static final float INFILTRATOR_PROJECTILE_SPEED = 4f;
   /** Maximum infiltrators in a full game of Auber (including defated ones). */
-  public static final int MAX_INFILTRATORS = 8;
+  // TODO: Reset this to 8 once testing is complete
+  public static final int MAX_INFILTRATORS = 2;
   /** The interval at which the infiltrator should attack the player when exposed. */
   public static final float INFILTRATOR_FIRING_INTERVAL = 5f;
   /** The damage a projectile should do. */
@@ -167,7 +168,8 @@ public class World {
    * Max infiltrators alive at a given point, Should always be greater or equal to
    * {@link World#MAX_INFILTRATORS}.
    * */
-  public static final int MAX_INFILTRATORS_IN_GAME = 3;
+  // TODO: Reset this back to 3 once testing is done
+  public static final int MAX_INFILTRATORS_IN_GAME = 2;
 
   /** The amount of variance there should be between the speeds of different NPCs. */
   public static final float[] NPC_SPEED_VARIANCE = {0.8f, 1.2f};
