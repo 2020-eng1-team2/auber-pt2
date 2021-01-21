@@ -31,6 +31,7 @@ public class GameUi {
 
   private Sprite arrowSprite;
   private Sprite miniMapSprite;
+  private float MINIMAP_SCALE_FACTOR = 2f;
   private Color blindedColor = new Color(0f, 0f, 0f, 1f);
 
   private BitmapFont uiFont = new BitmapFont();
@@ -38,6 +39,7 @@ public class GameUi {
   public GameUi(AuberGame game) {
     arrowSprite = game.atlas.createSprite("arrow2");
     miniMapSprite = game.atlas.createSprite("placeholder");
+    miniMapSprite.scale(MINIMAP_SCALE_FACTOR);
   }
 
   /**
@@ -182,7 +184,7 @@ public class GameUi {
   // TODO: Finish minimap, need to insert new textures first
   private void drawMinimap(World world, SpriteBatch screenBatch){
     screenBatch.begin();
-    miniMapSprite.setPosition(Gdx.graphics.getWidth() - miniMapSprite.getWidth(), Gdx.graphics.getHeight() - miniMapSprite.getHeight());
+    miniMapSprite.setPosition(Gdx.graphics.getWidth() - (miniMapSprite.getWidth() * MINIMAP_SCALE_FACTOR), Gdx.graphics.getHeight() - (miniMapSprite.getHeight() * MINIMAP_SCALE_FACTOR));
     miniMapSprite.draw(screenBatch);
     screenBatch.end();
   }
