@@ -2,6 +2,7 @@ package com.threecubed.auber.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,14 +32,16 @@ public class GameUi {
 
   private Sprite arrowSprite;
   private Sprite miniMapSprite;
-  private float MINIMAP_SCALE_FACTOR = 2f;
+  private Sprite maskSprite;
+  private float MINIMAP_SCALE_FACTOR = 1f;
   private Color blindedColor = new Color(0f, 0f, 0f, 1f);
 
   private BitmapFont uiFont = new BitmapFont();
 
   public GameUi(AuberGame game) {
     arrowSprite = game.atlas.createSprite("arrow2");
-    miniMapSprite = game.atlas.createSprite("placeholder");
+    miniMapSprite = game.atlas.createSprite("minimapTexture");
+    maskSprite = game.atlas.createSprite("map_mask");
     miniMapSprite.scale(MINIMAP_SCALE_FACTOR);
   }
 
@@ -184,8 +187,16 @@ public class GameUi {
   // TODO: Finish minimap, need to insert new textures first
   private void drawMinimap(World world, SpriteBatch screenBatch){
     screenBatch.begin();
-    miniMapSprite.setPosition(Gdx.graphics.getWidth() - (miniMapSprite.getWidth() * MINIMAP_SCALE_FACTOR), Gdx.graphics.getHeight() - (miniMapSprite.getHeight() * MINIMAP_SCALE_FACTOR));
+    miniMapSprite.setPosition(
+            Gdx.graphics.getWidth() - (miniMapSprite.getWidth() * MINIMAP_SCALE_FACTOR),
+            Gdx.graphics.getHeight() - (miniMapSprite.getHeight() * MINIMAP_SCALE_FACTOR)
+    );
     miniMapSprite.draw(screenBatch);
+    maskSprite.setPosition(
+            Gdx.graphics.getWidth() - maskSprite.getWidth(),
+            Gdx.graphics.getHeight() - maskSprite.getHeight()
+    );
+    maskSprite.draw(screenBatch);
     screenBatch.end();
   }
 }

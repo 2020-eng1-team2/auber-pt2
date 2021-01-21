@@ -13,7 +13,7 @@ alienA
   index: -1
 alienB
   rotate: false
-  xy: 1168, 304
+  xy: 1068, 202
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -55,7 +55,7 @@ demoButton
   index: -1
 infiltrator
   rotate: false
-  xy: 456, 88
+  xy: 1320, 304
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -67,9 +67,16 @@ instructions
   orig: 862, 859
   offset: 0, 0
   index: -1
+map_mask
+  rotate: false
+  xy: 866, 16
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
 placeholder
   rotate: false
-  xy: 304, 2
+  xy: 1168, 218
   size: 150, 100
   orig: 150, 100
   offset: 0, 0
@@ -83,7 +90,7 @@ playButton
   index: -1
 player
   rotate: false
-  xy: 866, 202
+  xy: 304, 88
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -100,5 +107,18 @@ stars
   xy: 2, 965
   size: 1920, 1080
   orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+
+auber2.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+minimapTexture
+  rotate: false
+  xy: 2, 2
+  size: 736, 736
+  orig: 736, 736
   offset: 0, 0
   index: -1
