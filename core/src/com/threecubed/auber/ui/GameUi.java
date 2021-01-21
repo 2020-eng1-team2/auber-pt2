@@ -37,6 +37,7 @@ public class GameUi {
   private Sprite arrowSprite;
   private Sprite miniMapSprite;
   private Sprite miniMapMarker;
+  private Sprite miniMapSystemMarker;
   private float MINIMAP_SCALE_FACTOR = 1f;
   private Vector2 minimapOffset = new Vector2(150f, 150f);
   private Vector2 mapPos;
@@ -48,6 +49,7 @@ public class GameUi {
     arrowSprite = game.atlas.createSprite("arrow2");
     miniMapSprite = game.atlas.createSprite("minimapTexture");
     miniMapMarker = game.atlas.createSprite("mm_indicator");
+    miniMapSystemMarker = game.atlas.createSprite("mm_system_indicator");
     miniMapSprite.scale(MINIMAP_SCALE_FACTOR);
     mapPos = new Vector2(
             Gdx.graphics.getWidth() - miniMapSprite.getWidth() - minimapOffset.x,
@@ -196,20 +198,31 @@ public class GameUi {
 
   // TODO: Finish minimap
   private void drawMinimap(World world, SpriteBatch screenBatch){
-
     screenBatch.begin();
+    // Draw mini map background
     miniMapSprite.setPosition(
             mapPos.x,
             mapPos.y
     );
     miniMapSprite.draw(screenBatch);
-    // TODO: Draw system indicator
-    Gdx.app.log("pos", world.player.position.toString());
+    // Draw player indicator over map
     miniMapMarker.setPosition(
             mapPos.x + (miniMapSprite.getWidth() * ((world.player.position.x/MAP_WIDTH_PIXEL_SPACE) * 2f) - (miniMapSprite.getWidth() * 0.5f)) - (miniMapMarker.getWidth() / 2f),
             mapPos.y + (miniMapSprite.getHeight() * ((world.player.position.y/MAP_HEIGHT_PIXEL_SPACE) * 2f) - (miniMapSprite.getHeight() * 0.5f)) - (miniMapMarker.getHeight() / 2f)
     );
     miniMapMarker.draw(screenBatch);
+    // Draw comprimised systems over map
+    // TODO: Maybe make the system indicators blink?
+    for (RectangleMapObject system : world.systems) {
+      if (world.getSystemState(system) == World.SystemStates.ATTACKED) {
+        // Draw on map
+        miniMapSystemMarker.setPosition(
+                mapPos.x + (miniMapSprite.getWidth() * ((system.getRectangle().getX()/MAP_WIDTH_PIXEL_SPACE) * 2f) - (miniMapSprite.getWidth() * 0.5f)) - (miniMapSystemMarker.getWidth() / 2f),
+                mapPos.y + (miniMapSprite.getHeight() * ((system.getRectangle().getY()/MAP_HEIGHT_PIXEL_SPACE) * 2f) - (miniMapSprite.getHeight() * 0.5f)) - (miniMapSystemMarker.getHeight() / 2f)
+        );
+        miniMapSystemMarker.draw(screenBatch);
+      }
+    }
     screenBatch.end();
   }
 }

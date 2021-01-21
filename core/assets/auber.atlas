@@ -20,7 +20,7 @@ alienB
   index: -1
 alienC
   rotate: false
-  xy: 1868, 931
+  xy: 1886, 949
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -81,6 +81,13 @@ mm_indicator
   orig: 14, 14
   offset: 0, 0
   index: -1
+mm_system_indicator
+  rotate: false
+  xy: 1868, 931
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
 placeholder
   rotate: false
   xy: 1168, 218
@@ -104,7 +111,7 @@ player
   index: -1
 projectile
   rotate: false
-  xy: 1886, 955
+  xy: 304, 78
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
