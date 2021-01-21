@@ -30,12 +30,14 @@ public class GameUi {
   private ShapeRenderer shapeRenderer = new ShapeRenderer();
 
   private Sprite arrowSprite;
+  private Sprite miniMapSprite;
   private Color blindedColor = new Color(0f, 0f, 0f, 1f);
 
   private BitmapFont uiFont = new BitmapFont();
 
   public GameUi(AuberGame game) {
     arrowSprite = game.atlas.createSprite("arrow2");
+    miniMapSprite = game.atlas.createSprite("placeholder");
   }
 
   /**
@@ -57,6 +59,7 @@ public class GameUi {
     drawHealthbar(world, screenBatch);
     drawHealthWarnings(world, screenBatch);
     drawSystemWarnings(world, screenBatch);
+    drawMinimap(world, screenBatch);
   }
 
   /**
@@ -173,6 +176,14 @@ public class GameUi {
 
     }
     uiFont.setColor(Color.WHITE);
+    screenBatch.end();
+  }
+
+  // TODO: Finish minimap, need to insert new textures first
+  private void drawMinimap(World world, SpriteBatch screenBatch){
+    screenBatch.begin();
+    miniMapSprite.setPosition(Gdx.graphics.getWidth() - miniMapSprite.getWidth(), Gdx.graphics.getHeight() - miniMapSprite.getHeight());
+    miniMapSprite.draw(screenBatch);
     screenBatch.end();
   }
 }

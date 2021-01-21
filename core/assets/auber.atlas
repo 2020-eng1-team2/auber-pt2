@@ -6,7 +6,7 @@ filter: Nearest,Nearest
 repeat: none
 alienA
   rotate: false
-  xy: 866, 202
+  xy: 1924, 2013
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -20,7 +20,7 @@ alienB
   index: -1
 alienC
   rotate: false
-  xy: 1924, 2013
+  xy: 1942, 2031
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -55,7 +55,7 @@ demoButton
   index: -1
 infiltrator
   rotate: false
-  xy: 304, 88
+  xy: 456, 88
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -67,6 +67,13 @@ instructions
   orig: 862, 859
   offset: 0, 0
   index: -1
+placeholder
+  rotate: false
+  xy: 304, 2
+  size: 150, 100
+  orig: 150, 100
+  offset: 0, 0
+  index: -1
 playButton
   rotate: false
   xy: 2, 2
@@ -76,7 +83,7 @@ playButton
   index: -1
 player
   rotate: false
-  xy: 1942, 2031
+  xy: 866, 202
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
