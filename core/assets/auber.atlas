@@ -6,21 +6,21 @@ filter: Nearest,Nearest
 repeat: none
 alienA
   rotate: false
-  xy: 866, 202
+  xy: 1924, 2013
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 alienB
   rotate: false
-  xy: 1168, 304
+  xy: 1052, 202
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 alienC
   rotate: false
-  xy: 1924, 2013
+  xy: 1886, 949
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -55,7 +55,7 @@ demoButton
   index: -1
 infiltrator
   rotate: false
-  xy: 304, 88
+  xy: 1320, 304
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -67,6 +67,34 @@ instructions
   orig: 862, 859
   offset: 0, 0
   index: -1
+minimapTexture
+  rotate: false
+  xy: 866, 32
+  size: 184, 184
+  orig: 184, 184
+  offset: 0, 0
+  index: -1
+mm_indicator
+  rotate: false
+  xy: 1942, 2031
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+mm_system_indicator
+  rotate: false
+  xy: 1868, 931
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+placeholder
+  rotate: false
+  xy: 1168, 218
+  size: 150, 100
+  orig: 150, 100
+  offset: 0, 0
+  index: -1
 playButton
   rotate: false
   xy: 2, 2
@@ -76,14 +104,14 @@ playButton
   index: -1
 player
   rotate: false
-  xy: 1942, 2031
+  xy: 304, 88
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 projectile
   rotate: false
-  xy: 1868, 937
+  xy: 304, 78
   size: 8, 8
   orig: 8, 8
   offset: 0, 0

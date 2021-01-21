@@ -2,6 +2,8 @@ package com.threecubed.auber.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,6 +25,9 @@ public class GameUi {
   private static final int HEALTHBAR_WIDTH = 20;
   private static final int HEALTHBAR_MAX_HEIGHT = 100;
 
+  private static final int MAP_HEIGHT_PIXEL_SPACE = 720;
+  private static final int MAP_WIDTH_PIXEL_SPACE = 720;
+
   private static final Vector2 HEALTH_WARNINGS_POSITION = new Vector2(350f, 70f);
 
   private static final Vector2 SYSTEM_WARNINGS_POSITION = new Vector2(1750f, 50f);
@@ -30,12 +35,26 @@ public class GameUi {
   private ShapeRenderer shapeRenderer = new ShapeRenderer();
 
   private Sprite arrowSprite;
+  private Sprite miniMapSprite;
+  private Sprite miniMapMarker;
+  private Sprite miniMapSystemMarker;
+  private float MINIMAP_SCALE_FACTOR = 1f;
+  private Vector2 minimapOffset = new Vector2(150f, 150f);
+  private Vector2 mapPos;
   private Color blindedColor = new Color(0f, 0f, 0f, 1f);
 
   private BitmapFont uiFont = new BitmapFont();
 
   public GameUi(AuberGame game) {
     arrowSprite = game.atlas.createSprite("arrow2");
+    miniMapSprite = game.atlas.createSprite("minimapTexture");
+    miniMapMarker = game.atlas.createSprite("mm_indicator");
+    miniMapSystemMarker = game.atlas.createSprite("mm_system_indicator");
+    miniMapSprite.scale(MINIMAP_SCALE_FACTOR);
+    mapPos = new Vector2(
+            Gdx.graphics.getWidth() - miniMapSprite.getWidth() - minimapOffset.x,
+            Gdx.graphics.getHeight() - miniMapSprite.getHeight() - minimapOffset.y
+    );
   }
 
   /**
@@ -57,6 +76,7 @@ public class GameUi {
     drawHealthbar(world, screenBatch);
     drawHealthWarnings(world, screenBatch);
     drawSystemWarnings(world, screenBatch);
+    drawMinimap(world, screenBatch);
   }
 
   /**
@@ -173,6 +193,43 @@ public class GameUi {
 
     }
     uiFont.setColor(Color.WHITE);
+    screenBatch.end();
+  }
+
+  /**
+   * Draw the minimap to the screen.
+   *
+   * @param world The world object
+   * @param screenBatch The batch to draw to
+   * */
+  private void drawMinimap(World world, SpriteBatch screenBatch){
+    screenBatch.begin();
+    // Draw mini map background
+    miniMapSprite.setPosition(
+            mapPos.x,
+            mapPos.y
+    );
+    miniMapSprite.draw(screenBatch);
+
+    // Draw player indicator over map
+    miniMapMarker.setPosition(
+            mapPos.x + (miniMapSprite.getWidth() * ((world.player.position.x/MAP_WIDTH_PIXEL_SPACE) * 2f) - (miniMapSprite.getWidth() * 0.5f)) - (miniMapMarker.getWidth() / 2f),
+            mapPos.y + (miniMapSprite.getHeight() * ((world.player.position.y/MAP_HEIGHT_PIXEL_SPACE) * 2f) - (miniMapSprite.getHeight() * 0.5f))
+    );
+    miniMapMarker.draw(screenBatch);
+
+    // Draw compromised systems over map
+    // TODO: Maybe make the system indicators blink?
+    for (RectangleMapObject system : world.systems) {
+      if (world.getSystemState(system) == World.SystemStates.ATTACKED) {
+        // Draw on map
+        miniMapSystemMarker.setPosition(
+                mapPos.x + (miniMapSprite.getWidth() * ((system.getRectangle().getX()/MAP_WIDTH_PIXEL_SPACE) * 2f) - (miniMapSprite.getWidth() * 0.5f)) - (miniMapSystemMarker.getWidth() / 2f),
+                mapPos.y + (miniMapSprite.getHeight() * ((system.getRectangle().getY()/MAP_HEIGHT_PIXEL_SPACE) * 2f) - (miniMapSprite.getHeight() * 0.5f)) - (miniMapSystemMarker.getHeight() / 2f)
+        );
+        miniMapSystemMarker.draw(screenBatch);
+      }
+    }
     screenBatch.end();
   }
 }

@@ -37,7 +37,7 @@ inputFiles=[{path:individual_sprites,type:Input,dirFilePrefix:null,recursive:fal
 
 -PROJ-
 
-version=4.8.2
+version=4.9.0
 fileTypeType=png
 fileTypeData={encoding:RGBA8888}
 previewBackgroundColor=ffffffff
