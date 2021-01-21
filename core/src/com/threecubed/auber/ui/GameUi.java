@@ -196,7 +196,12 @@ public class GameUi {
     screenBatch.end();
   }
 
-  // TODO: Finish minimap
+  /**
+   * Draw the minimap to the screen.
+   *
+   * @param world The world object
+   * @param screenBatch The batch to draw to
+   * */
   private void drawMinimap(World world, SpriteBatch screenBatch){
     screenBatch.begin();
     // Draw mini map background
@@ -205,13 +210,15 @@ public class GameUi {
             mapPos.y
     );
     miniMapSprite.draw(screenBatch);
+
     // Draw player indicator over map
     miniMapMarker.setPosition(
             mapPos.x + (miniMapSprite.getWidth() * ((world.player.position.x/MAP_WIDTH_PIXEL_SPACE) * 2f) - (miniMapSprite.getWidth() * 0.5f)) - (miniMapMarker.getWidth() / 2f),
-            mapPos.y + (miniMapSprite.getHeight() * ((world.player.position.y/MAP_HEIGHT_PIXEL_SPACE) * 2f) - (miniMapSprite.getHeight() * 0.5f)) - (miniMapMarker.getHeight() / 2f)
+            mapPos.y + (miniMapSprite.getHeight() * ((world.player.position.y/MAP_HEIGHT_PIXEL_SPACE) * 2f) - (miniMapSprite.getHeight() * 0.5f))
     );
     miniMapMarker.draw(screenBatch);
-    // Draw comprimised systems over map
+
+    // Draw compromised systems over map
     // TODO: Maybe make the system indicators blink?
     for (RectangleMapObject system : world.systems) {
       if (world.getSystemState(system) == World.SystemStates.ATTACKED) {
