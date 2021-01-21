@@ -4,6 +4,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.threecubed.auber.Assets;
+import com.threecubed.auber.Constants;
 import com.threecubed.auber.World;
 
 
@@ -34,7 +36,7 @@ public class Projectile extends GameEntity {
    * */
   public Projectile(float x, float y, Vector2 velocity, GameEntity originEntity,
       CollisionActions action, World world) {
-    super(x, y, world.atlas.createSprite("projectile"));
+    super(x, y, Assets.atlas.createSprite("projectile"));
     collisionAction = action;
     this.originEntity = originEntity;
     this.velocity = velocity;
@@ -61,7 +63,7 @@ public class Projectile extends GameEntity {
     }
 
     TiledMapTileLayer collisionLayer = (TiledMapTileLayer)
-        World.map.getLayers().get("collision_layer");
+        Assets.map.getLayers().get("collision_layer");
 
     int[] cellCoordinates = world.navigationMesh.getTilemapCoordinates(getCenterX(), getCenterY());
 
@@ -84,7 +86,7 @@ public class Projectile extends GameEntity {
       default:
         break;
     }
-    world.player.health -= World.INFILTRATOR_PROJECTILE_DAMAGE;
+    world.player.health -= Constants.INFILTRATOR_PROJECTILE_DAMAGE;
   }
 
   private void confusePlayer(final World world) {
@@ -94,7 +96,7 @@ public class Projectile extends GameEntity {
       public void run() {
         world.player.confused = false;
       }
-    }, World.AUBER_DEBUFF_TIME);
+    }, Constants.AUBER_DEBUFF_TIME);
   }
 
   private void slowPlayer(final World world) {
@@ -104,7 +106,7 @@ public class Projectile extends GameEntity {
       public void run() {
         world.player.slowed = false;
       }
-    }, World.AUBER_DEBUFF_TIME);
+    }, Constants.AUBER_DEBUFF_TIME);
   }
 
   private void blindPlayer(final World world) {
@@ -114,6 +116,6 @@ public class Projectile extends GameEntity {
       public void run() {
         world.player.blinded = false;
       }
-    }, World.AUBER_DEBUFF_TIME - 3f);
+    }, Constants.AUBER_DEBUFF_TIME - 3f);
   }
 }

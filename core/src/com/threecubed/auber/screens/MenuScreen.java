@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.threecubed.auber.Assets;
 import com.threecubed.auber.AuberGame;
 import com.threecubed.auber.World;
 import com.threecubed.auber.ui.Button;
@@ -45,9 +46,9 @@ public class MenuScreen extends ScreenAdapter {
 
     spriteBatch = new SpriteBatch();
 
-    background = game.atlas.createSprite("stars");
-    instructions = game.atlas.createSprite("instructions");
-    title = game.atlas.createSprite("auber_logo");
+    background = Assets.atlas.createSprite("stars");
+    instructions = Assets.atlas.createSprite("instructions");
+    title = Assets.atlas.createSprite("auber_logo");
 
     Runnable onPlayClick = new Runnable() {
       @Override
@@ -58,7 +59,7 @@ public class MenuScreen extends ScreenAdapter {
 
     playButton = new Button(
         new Vector2(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 2),
-        1f, game.atlas.createSprite("playButton"), game, onPlayClick);
+        1f, Assets.atlas.createSprite("playButton"), game, onPlayClick);
 
     Runnable onDemoClick = new Runnable() {
       @Override
@@ -69,7 +70,7 @@ public class MenuScreen extends ScreenAdapter {
 
     demoButton = new Button(
         new Vector2(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 2 - 150f),
-        1f, game.atlas.createSprite("demoButton"), game, onDemoClick);
+        1f, Assets.atlas.createSprite("demoButton"), game, onDemoClick);
   }
 
   @Override

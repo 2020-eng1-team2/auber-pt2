@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.threecubed.auber.Assets;
+import com.threecubed.auber.Constants;
 import com.threecubed.auber.Utils;
 import com.threecubed.auber.World;
 import com.threecubed.auber.pathfinding.NavigationMesh;
@@ -56,8 +58,8 @@ public abstract class Npc extends GameEntity {
   public Npc(float x, float y, Sprite sprite, NavigationMesh navigationMesh) {
     super(x, y, sprite);
     Random rng = new Random(); // TODO: Switch to use the world RNG
-    maxSpeed *= Utils.randomFloatInRange(rng, World.NPC_SPEED_VARIANCE[0],
-        World.NPC_SPEED_VARIANCE[1]);
+    maxSpeed *= Utils.randomFloatInRange(rng, Constants.NPC_SPEED_VARIANCE[0],
+        Constants.NPC_SPEED_VARIANCE[1]);
     this.navigationMesh = navigationMesh;
   }
 
@@ -70,7 +72,7 @@ public abstract class Npc extends GameEntity {
    * */
   public Npc(float x, float y, World world) {
     this(x, y,
-        world.atlas.createSprite(
+        Assets.atlas.createSprite(
           textureNames[Utils.randomIntInRange(world.randomNumberGenerator, 0,
             textureNames.length - 1)]),
         world.navigationMesh);
@@ -103,7 +105,7 @@ public abstract class Npc extends GameEntity {
       if (currentDirection.x == targetDirection.x && targetDirection.x != 0) {
         float velocityX = Math.signum(targetCoordinates.x - position.x) * maxSpeed;
         if (state == States.FLEEING) {
-          velocityX *= World.NPC_FLEE_MULTIPLIER;
+          velocityX *= Constants.NPC_FLEE_MULTIPLIER;
         }
         position.x += velocityX;
         entityMoved = true;
@@ -112,7 +114,7 @@ public abstract class Npc extends GameEntity {
       if (currentDirection.y == targetDirection.y && targetDirection.y != 0) {
         float velocityY = Math.signum(targetCoordinates.y - position.y) * maxSpeed;
         if (state == States.FLEEING) {
-          velocityY *= World.NPC_FLEE_MULTIPLIER;
+          velocityY *= Constants.NPC_FLEE_MULTIPLIER;
         }
         position.y += velocityY;
         entityMoved = true;
@@ -249,7 +251,7 @@ public abstract class Npc extends GameEntity {
     ArrayList<Float> distances = new ArrayList<>();
     ArrayList<float[]> closestFleePoints = new ArrayList<>();
 
-    Circle minimumFleeRange = new Circle(position, World.NPC_MIN_FLEE_DISTANCE);
+    Circle minimumFleeRange = new Circle(position, Constants.NPC_MIN_FLEE_DISTANCE);
 
     for (float[] fleePoint : world.fleePoints) {
       float newDistance = NavigationMesh.getEuclidianDistance(fleePoint,
@@ -290,7 +292,7 @@ public abstract class Npc extends GameEntity {
           navigateToRandomSystem(world);
         }
       }
-    }, World.NPC_FLEE_TIME);
+    }, Constants.NPC_FLEE_TIME);
   }
 
   public States getState() {

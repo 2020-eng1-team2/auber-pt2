@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.threecubed.auber.Assets;
 import com.threecubed.auber.AuberGame;
+import com.threecubed.auber.Constants;
 import com.threecubed.auber.World;
 import com.threecubed.auber.entities.Civilian;
 import com.threecubed.auber.entities.GameEntity;
@@ -46,15 +48,15 @@ public class GameScreen extends ScreenAdapter {
 
     world = new World(game, demoMode);
 
-    for (int i = 0; i < World.MAX_INFILTRATORS_IN_GAME; i++) {
+    for (int i = 0; i < Constants.MAX_INFILTRATORS_IN_GAME; i++) {
       world.queueEntityAdd(new Infiltrator(world));
       world.infiltratorsAddedCount++;
     }
-    for (int i = 0; i < World.NPC_COUNT; i++) {
+    for (int i = 0; i < Constants.NPC_COUNT; i++) {
       world.queueEntityAdd(new Civilian(world));
     }
 
-    stars = game.atlas.createSprite("stars");
+    stars = Assets.atlas.createSprite("stars");
   }
 
   @Override
@@ -99,8 +101,8 @@ public class GameScreen extends ScreenAdapter {
     batch.end();
     renderer.render(world.foregroundLayersIds);
 
-    if (world.infiltratorCount < World.MAX_INFILTRATORS_IN_GAME
-        && world.infiltratorsAddedCount < World.MAX_INFILTRATORS) {
+    if (world.infiltratorCount < Constants.MAX_INFILTRATORS_IN_GAME
+        && world.infiltratorsAddedCount < Constants.MAX_INFILTRATORS) {
       Infiltrator newInfiltrator = new Infiltrator(world);
       while (newInfiltrator.entityOnScreen(world)) {
         newInfiltrator.moveToRandomLocation(world);

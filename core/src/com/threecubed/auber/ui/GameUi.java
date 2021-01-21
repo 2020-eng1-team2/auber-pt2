@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.threecubed.auber.Assets;
 import com.threecubed.auber.AuberGame;
 import com.threecubed.auber.World;
 
@@ -35,7 +36,7 @@ public class GameUi {
   private BitmapFont uiFont = new BitmapFont();
 
   public GameUi(AuberGame game) {
-    arrowSprite = game.atlas.createSprite("arrow2");
+    arrowSprite = Assets.atlas.createSprite("arrow2");
   }
 
   /**

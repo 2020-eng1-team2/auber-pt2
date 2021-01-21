@@ -2,15 +2,11 @@ package com.threecubed.auber;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.threecubed.auber.entities.GameEntity;
 import com.threecubed.auber.entities.Player;
@@ -47,11 +43,7 @@ public class World {
 
   public OrthographicCamera camera = new OrthographicCamera();
 
-  public static final TiledMap map = new TmxMapLoader().load("map.tmx");
-  public static final TiledMapTileSet tileset = map.getTileSets().getTileSet(0);
-  public TextureAtlas atlas;
-
-  public OrthogonalTiledMapRenderer renderer = new OrthogonalTiledMapRenderer(map);
+  public OrthogonalTiledMapRenderer renderer = new OrthogonalTiledMapRenderer(Assets.map);
 
   public ArrayList<RectangleMapObject> systems = new ArrayList<>();
   public RectangleMapObject medbay;
@@ -61,38 +53,25 @@ public class World {
 
   // ------------------NAVIGATION----------------
   public final NavigationMesh navigationMesh = new NavigationMesh(
-      (TiledMapTileLayer) map.getLayers().get("navigation_layer")
+      (TiledMapTileLayer) Assets.map.getLayers().get("navigation_layer")
       );
   public ArrayList<float[]> fleePoints = new ArrayList<>();
 
-  /** Coordinates for the bottom left and top right tiles of the brig. */
-  public static final float[][] BRIG_BOUNDS = {{240f, 608f}, {352f, 640f}};
-  /** Coordinates for the medbay teleporter. */
-  public static final float[] MEDBAY_COORDINATES = {96f, 640f};
-
   // --------------------AUBER-------------------
   public float auberTeleporterCharge = 0f;
-  /** The rate at which the teleporter ray charges. */
-  public static final float AUBER_CHARGE_RATE = 0.05f;
-  /** The time the ray should visibly render for. */
-  public static final float AUBER_RAY_TIME = 0.25f;
-  /** The time a debuff should last for (with the exception of blindness). */
-  public static final float AUBER_DEBUFF_TIME = 5f;
-  /** The rate at which auber should heal. */
-  public static final float AUBER_HEAL_RATE = 0.005f;
   public static final Color rayColorA = new Color(0.106f, 0.71f, 0.714f, 1f);
   public static final Color rayColorB = new Color(0.212f, 1f, 1f, 0.7f);
 
   // ------------------RENDERING-----------------
   /** IDs of layers that should be rendered behind entities. */
   public final int[] backgroundLayersIds = {
-    map.getLayers().getIndex("background_layer"),
+    Assets.map.getLayers().getIndex("background_layer"),
     };
 
   /** IDs of layers that should be rendered infront of entities. */
   public final int[] foregroundLayersIds = {
-    map.getLayers().getIndex("foreground_layer"),
-    map.getLayers().getIndex("collision_layer")
+    Assets.map.getLayers().getIndex("foreground_layer"),
+    Assets.map.getLayers().getIndex("collision_layer")
     };
 
 
@@ -128,7 +107,7 @@ public class World {
      * */
     public Cell getCell() {
       Cell output = new Cell();
-      output.setTile(tileset.getTile(tileId));
+      output.setTile(Assets.tileset.getTile(tileId));
       return output;
     }
 
@@ -149,39 +128,6 @@ public class World {
     }
   }
 
-  /** The amount of time it takes for an infiltrator to sabotage a system. */
-  public static final float SYSTEM_BREAK_TIME = 5f;
-  /** The chance an infiltrator will sabotage after pathfinding to a system. */
-  public static final float SYSTEM_SABOTAGE_CHANCE = 0.6f;
-  /** The distance the infiltrator can see. Default: 5 tiles */
-  public static final float INFILTRATOR_SIGHT_RANGE = 80f;
-  /** The speed at which infiltrator projectiles should travel. */
-  public static final float INFILTRATOR_PROJECTILE_SPEED = 4f;
-  /** Maximum infiltrators in a full game of Auber (including defated ones). */
-  public static final int MAX_INFILTRATORS = 8;
-  /** The interval at which the infiltrator should attack the player when exposed. */
-  public static final float INFILTRATOR_FIRING_INTERVAL = 5f;
-  /** The damage a projectile should do. */
-  public static final float INFILTRATOR_PROJECTILE_DAMAGE = 0.2f;
-  /**
-   * Max infiltrators alive at a given point, Should always be greater or equal to
-   * {@link World#MAX_INFILTRATORS}.
-   * */
-  public static final int MAX_INFILTRATORS_IN_GAME = 3;
-
-  /** The amount of variance there should be between the speeds of different NPCs. */
-  public static final float[] NPC_SPEED_VARIANCE = {0.8f, 1.2f};
-  /** The maximum amount of time (in seconds) an NPC should flee for. */
-  public static final float NPC_FLEE_TIME = 10f;
-  /** The speed multiplier an NPC should receive when fleeing. */
-  public static final float NPC_FLEE_MULTIPLIER = 1.2f;
-  /** The shortest distance an NPC should move from its current position when fleeing. */
-  public static final float NPC_MIN_FLEE_DISTANCE = 80f;
-  /** The distance an NPC can here the teleporter ray shoot from. */
-  public static final float NPC_EAR_STRENGTH = 80f;
-  /** The number of NPCs in the game. */
-  public static final int NPC_COUNT = 24;
-
   public static enum SystemStates {
     WORKING,
     ATTACKED,
@@ -195,7 +141,6 @@ public class World {
    * */
   public World(AuberGame game) {
     this.game = game;
-    atlas = game.atlas;
 
     // Configure the camera
     camera.setToOrtho(false, 480, 270);
@@ -205,7 +150,7 @@ public class World {
     queueEntityAdd(player);
     this.player = player;
 
-    MapObjects objects = map.getLayers().get("object_layer").getObjects();
+    MapObjects objects = Assets.map.getLayers().get("object_layer").getObjects();
     for (MapObject object : objects) {
       if (object instanceof RectangleMapObject) {
         RectangleMapObject rectangularObject = (RectangleMapObject) object;
@@ -222,7 +167,7 @@ public class World {
       }
     }
 
-    TiledMapTileLayer navigationLayer = (TiledMapTileLayer) map.getLayers().get("navigation_layer");
+    TiledMapTileLayer navigationLayer = (TiledMapTileLayer) Assets.map.getLayers().get("navigation_layer");
     for (int y = 0; y < navigationLayer.getHeight(); y++) {
       for (int x = 0; x < navigationLayer.getWidth(); x++) {
         Cell currentCell = navigationLayer.getCell(x, y);
@@ -251,7 +196,7 @@ public class World {
     this.demoMode = demoMode;
     if (demoMode) {
       camera.setToOrtho(false, 1920, 1080);
-      TiledMapTileLayer layer = ((TiledMapTileLayer) map.getLayers().get(2));
+      TiledMapTileLayer layer = ((TiledMapTileLayer) Assets.map.getLayers().get(2));
       player.position.x = (layer.getWidth() * layer.getTileWidth()) / 2;
       player.position.y = (layer.getHeight() * layer.getTileHeight()) / 2;
       player.sprite.setColor(1f, 1f, 1f, 0f);
@@ -302,7 +247,7 @@ public class World {
    * @param newState The new state of the system
    **/
   public void updateSystemState(float x, float y, SystemStates newState) {
-    TiledMapTileLayer collisionLayer = (TiledMapTileLayer) World.map.getLayers()
+    TiledMapTileLayer collisionLayer = (TiledMapTileLayer) Assets.map.getLayers()
         .get("collision_layer");
 
     int[] systemPosition = {
@@ -340,7 +285,7 @@ public class World {
       }
       collisionLayer.setCell(systemPosition[0], systemPosition[1], newSystem);
 
-      TiledMapTileLayer foregroundLayer = (TiledMapTileLayer) map.getLayers()
+      TiledMapTileLayer foregroundLayer = (TiledMapTileLayer) Assets.map.getLayers()
           .get("foreground_layer");
       foregroundLayer.setCell(systemPosition[0], systemPosition[1] + 1, newSystemLight);
     } else {
@@ -382,7 +327,7 @@ public class World {
    * @throws IllegalArgumentException if a standalone system light is at the coordinates provided
    * */
   public SystemStates getSystemState(float x, float y) {
-    TiledMapTileLayer collisionLayer = (TiledMapTileLayer) World.map.getLayers()
+    TiledMapTileLayer collisionLayer = (TiledMapTileLayer) Assets.map.getLayers()
         .get("collision_layer");
 
     int[] systemPosition = {
