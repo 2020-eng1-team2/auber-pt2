@@ -6,21 +6,21 @@ filter: Nearest,Nearest
 repeat: none
 alienA
   rotate: false
-  xy: 1924, 2013
+  xy: 1868, 931
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 alienB
   rotate: false
-  xy: 1052, 202
+  xy: 1320, 304
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 alienC
   rotate: false
-  xy: 1886, 949
+  xy: 320, 88
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -55,7 +55,14 @@ demoButton
   index: -1
 infiltrator
   rotate: false
-  xy: 1320, 304
+  xy: 1924, 2013
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+insta-beam
+  rotate: false
+  xy: 1320, 288
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -67,6 +74,20 @@ instructions
   orig: 862, 859
   offset: 0, 0
   index: -1
+invincibility
+  rotate: false
+  xy: 304, 88
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+invisibility
+  rotate: false
+  xy: 304, 72
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
 minimapTexture
   rotate: false
   xy: 866, 32
@@ -76,14 +97,14 @@ minimapTexture
   index: -1
 mm_indicator
   rotate: false
-  xy: 1942, 2031
+  xy: 1886, 949
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 mm_system_indicator
   rotate: false
-  xy: 1868, 931
+  xy: 1052, 186
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -104,14 +125,14 @@ playButton
   index: -1
 player
   rotate: false
-  xy: 304, 88
+  xy: 1052, 202
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 projectile
   rotate: false
-  xy: 304, 78
+  xy: 1336, 310
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
@@ -121,5 +142,19 @@ stars
   xy: 2, 965
   size: 1920, 1080
   orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+superspeed
+  rotate: false
+  xy: 1942, 2031
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+vision
+  rotate: false
+  xy: 1068, 202
+  size: 14, 14
+  orig: 14, 14
   offset: 0, 0
   index: -1
