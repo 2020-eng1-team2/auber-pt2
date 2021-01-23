@@ -14,6 +14,8 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.threecubed.auber.World;
 
+import java.util.List;
+
 
 /**
  * The GameEntity class is the abstract class from which all entities, including the player must
@@ -128,7 +130,7 @@ public abstract class GameEntity {
   }
 
   /**
-   * Return any interactable objects on the entities position.
+   * Return any interactable objects on the entities position, these objects must be in the "object_layer" of map.tmx.
    *
    * @param map The game world map
    * @return A {@link RectangleMapObject} on the entities position

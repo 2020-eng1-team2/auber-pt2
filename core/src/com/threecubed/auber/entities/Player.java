@@ -13,12 +13,15 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.threecubed.auber.Utils;
 import com.threecubed.auber.World;
 import com.threecubed.auber.pathfinding.NavigationMesh;
+
+import java.util.List;
 
 
 /**
@@ -173,7 +176,13 @@ public class Player extends GameEntity {
         velocity.set(-velocity.x, -velocity.y);
       }
 
-      move(velocity, World.map);  
+      move(velocity, World.map);
+
+      PowerUp pu = getNearbyPowerUps(world);
+      if (pu != null) {
+        Gdx.app.log("near", pu.getAbility());
+        // TODO: Despawn power up, and apply buff.
+      }
     }
   }
 
@@ -249,5 +258,23 @@ public class Player extends GameEntity {
       alpha += 0.1f;
     }
     return output;
+  }
+
+  /**
+   * Checks if the player has walked over an ability orb, works on dynamically spawned objects.
+   *
+   * @param world The game world
+   * @return The object the player walked over
+   * */
+  public PowerUp getNearbyPowerUps(World world) {
+    List<GameEntity> ents = world.getEntities();
+    for (GameEntity ent : ents) {
+      if (ent instanceof PowerUp) {
+        if (Intersector.overlaps(sprite.getBoundingRectangle(), ent.sprite.getBoundingRectangle())) {
+          return (PowerUp) ent;
+        }
+      }
+    }
+    return null;
   }
 }

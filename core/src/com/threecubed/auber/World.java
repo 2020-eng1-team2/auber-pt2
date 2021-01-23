@@ -440,4 +440,8 @@ public class World {
       game.setScreen(new GameOverScreen(game, true));
     }
   }
+
+  public Player getPlayer() {
+    return this.player;
+  }
 }

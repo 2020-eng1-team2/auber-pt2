@@ -4,35 +4,32 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Vector2;
 import com.threecubed.auber.World;
 import com.threecubed.auber.Utils;
 
 public class PowerUp extends GameEntity {
 
-    // TODO: Move this enum to class where PowerUp() is called, pass Abilities.toString() into constructor
-    // Randomization needs to be done before construction
-    public static enum Abilities {
-        superspeed,
-        vision,
-        invincibility,
-        invisibility,
-        insta_beam
-    }
+    private String ability;
 
-    private static final int NUMBER_OF_ABILITIES = 5;
+    private Vector2 position;
 
     public PowerUp(float x, float y, World world, String ability) {
         super(x, y, world.atlas.createSprite(ability));
+        this.ability = ability;
+        this.position = new Vector2(x, y);
     }
 
     @Override
     public void update(World world) {
-        // TODO: Check if player has picked up ability
 
-        //RectangleMapObject nearbyObject = getNearbyObjects(world.map);
+    }
 
-        //if (nearbyObject != null) {
-        //   Gdx.app.log("nearby", nearbyObject.getName());
-        //}
+    public String getAbility() {
+        return this.ability;
+    }
+
+    public Vector2 getPosition() {
+        return this.position;
     }
 }
