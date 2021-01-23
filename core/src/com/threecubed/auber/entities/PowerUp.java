@@ -12,12 +12,10 @@ public class PowerUp extends GameEntity {
 
     private String ability;
 
-    private Vector2 position;
-
     public PowerUp(float x, float y, World world, String ability) {
         super(x, y, world.atlas.createSprite(ability));
         this.ability = ability;
-        this.position = new Vector2(x, y);
+        position = new Vector2(x, y);
     }
 
     @Override
@@ -30,6 +28,6 @@ public class PowerUp extends GameEntity {
     }
 
     public Vector2 getPosition() {
-        return this.position;
+        return super.position;
     }
 }

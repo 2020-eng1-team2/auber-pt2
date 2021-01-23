@@ -160,6 +160,9 @@ public class Player extends GameEntity {
               break;
           }
         }
+
+        // TODO: Write buff spawning code
+        world.spawnBuff();
       }
 
       Vector2 mousePosition = Utils.getMouseCoordinates(world.camera);
@@ -182,6 +185,7 @@ public class Player extends GameEntity {
       if (pu != null) {
         Gdx.app.log("near", pu.getAbility());
         // TODO: Despawn power up, and apply buff.
+        world.queueEntityRemove(pu);
       }
     }
   }

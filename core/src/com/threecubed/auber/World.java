@@ -12,15 +12,16 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.threecubed.auber.entities.GameEntity;
+import com.threecubed.auber.entities.Npc;
 import com.threecubed.auber.entities.Player;
 import com.threecubed.auber.entities.PowerUp;
 import com.threecubed.auber.pathfinding.NavigationMesh;
 import com.threecubed.auber.screens.GameOverScreen;
 import com.threecubed.auber.screens.GameScreen;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+
+import java.util.*;
 
 
 /**
@@ -203,9 +204,6 @@ public class World {
     // Configure the camera
     camera.setToOrtho(false, 480, 270);
     camera.update();
-
-    PowerUp powerUpTest = new PowerUp(70f, 70f, this, "superspeed");
-    queueEntityAdd(powerUpTest);
 
     Player player = new Player(64f, 64f, this);
     queueEntityAdd(player);
@@ -443,5 +441,28 @@ public class World {
 
   public Player getPlayer() {
     return this.player;
+  }
+
+  // TODO: rewrite/clean this up
+  public enum Abilities {
+    superspeed,
+    invisibility,
+    invincibility,
+    insta_beam,
+    vision;
+
+    private static final List<Abilities> ABILITIES = Collections.unmodifiableList(Arrays.asList(values()));
+    private static final int SIZE = ABILITIES.size();
+    private static final Random RANDOM = new Random();
+
+    public static Abilities randomAbility() {
+      return ABILITIES.get(RANDOM.nextInt(SIZE));
+    }
+  }
+
+  public void spawnBuff() {
+    Vector2 spawnPos = this.getEntities().get(this.randomNumberGenerator.nextInt(this.getEntities().size())).position;
+    PowerUp powerUpTest = new PowerUp(spawnPos.x, spawnPos.y, this, Abilities.randomAbility().toString());
+    queueEntityAdd(powerUpTest);
   }
 }
