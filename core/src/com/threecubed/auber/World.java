@@ -13,10 +13,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.threecubed.auber.entities.GameEntity;
-import com.threecubed.auber.entities.Npc;
-import com.threecubed.auber.entities.Player;
-import com.threecubed.auber.entities.PowerUp;
+import com.threecubed.auber.entities.*;
 import com.threecubed.auber.pathfinding.NavigationMesh;
 import com.threecubed.auber.screens.GameOverScreen;
 import com.threecubed.auber.screens.GameScreen;
@@ -76,6 +73,10 @@ public class World {
   public float auberTeleporterCharge = 0f;
   /** The rate at which the teleporter ray charges. */
   public static final float AUBER_CHARGE_RATE = 0.05f;
+  /** The rate at which the teleporter ray charges during the insta_beam ability. */
+  public static final float AUBER_INSTA_BEAM_RATE = 1f;
+  /** The number of buffs which should spawn when a system is attacked. */
+  public static final int BUFFS_ON_ATTACK = 5;
   /** The time the ray should visibly render for. */
   public static final float AUBER_RAY_TIME = 0.25f;
   /** The time a debuff should last for (with the exception of blindness). */
@@ -161,7 +162,7 @@ public class World {
   public static final float INFILTRATOR_PROJECTILE_SPEED = 4f;
   /** Maximum infiltrators in a full game of Auber (including defated ones). */
   // TODO: Reset this to 8 once testing is complete
-  public static final int MAX_INFILTRATORS = 8;
+  public static final int MAX_INFILTRATORS = 3;
   /** The interval at which the infiltrator should attack the player when exposed. */
   public static final float INFILTRATOR_FIRING_INTERVAL = 5f;
   /** The damage a projectile should do. */
@@ -171,7 +172,7 @@ public class World {
    * {@link World#MAX_INFILTRATORS}.
    * */
   // TODO: Reset this back to 3 once testing is done
-  public static final int MAX_INFILTRATORS_IN_GAME = 3;
+  public static final int MAX_INFILTRATORS_IN_GAME = 2;
 
   /** The amount of variance there should be between the speeds of different NPCs. */
   public static final float[] NPC_SPEED_VARIANCE = {0.8f, 1.2f};
@@ -354,9 +355,10 @@ public class World {
           newSystem = World.Tiles.WALL_SYSTEM.getCell();
           break;
         case ATTACKED:
-          // TODO: Currently works, but could be better
-          spawnBuff();
-          spawnBuff();
+          // Spawn 3 buffs randomly when system is attacked
+          for (int i = 0; i < BUFFS_ON_ATTACK; i++) {
+            spawnBuff();
+          }
           newSystem = World.Tiles.WALL_SYSTEM_ATTACKED.getCell();
           break;
         case DESTROYED:
@@ -442,11 +444,6 @@ public class World {
     }
   }
 
-  public Player getPlayer() {
-    return this.player;
-  }
-
-  // TODO: rewrite/clean this up
   public enum Abilities {
     superspeed,
     invisibility,
@@ -455,14 +452,21 @@ public class World {
     vision;
 
     private static final List<Abilities> ABILITIES = Collections.unmodifiableList(Arrays.asList(values()));
-    private static final int SIZE = ABILITIES.size();
-    private static final Random RANDOM = new Random();
+    private static final int length = ABILITIES.size();
+    private static final Random rng = new Random();
 
     public static Abilities randomAbility() {
-      return ABILITIES.get(RANDOM.nextInt(SIZE));
+      return ABILITIES.get(rng.nextInt(length));
     }
   }
 
+  /**
+   * Spawns in a random buff in the position of a random entity (not player or other buffs)
+   *
+   * Currently broken, (buffs can spawn on player & other buffs)
+   * */
+
+  // TODO: Fix bug mentioned above
   public void spawnBuff() {
     Vector2 spawnPos = this.getEntities().get(this.randomNumberGenerator.nextInt(this.getEntities().size())).position;
     PowerUp powerUpTest = new PowerUp(spawnPos.x, spawnPos.y, this, Abilities.randomAbility().toString());

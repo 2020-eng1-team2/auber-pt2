@@ -117,9 +117,8 @@ public class GameUi {
     float healthbarHeight = world.player.health * HEALTHBAR_MAX_HEIGHT;
 
     // Set the healthbar colour based on amount of health/if invincible
-    // TODO: Pick better colour for invincible buff
     if (world.player.invincible) {
-      shapeRenderer.setColor(Color.GOLD);
+      shapeRenderer.setColor(Color.PURPLE);
     }
     else {
       if (healthbarHeight > CHARGE_METER_MAX_HEIGHT * 0.8f) {

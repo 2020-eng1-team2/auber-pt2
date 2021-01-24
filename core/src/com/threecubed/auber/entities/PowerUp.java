@@ -1,13 +1,8 @@
 package com.threecubed.auber.entities;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Timer;
 import com.threecubed.auber.World;
-import com.threecubed.auber.Utils;
 
 public class PowerUp extends GameEntity {
 
@@ -61,6 +56,13 @@ public class PowerUp extends GameEntity {
             case ("superspeed"):
                 this.world.player.superspeed = true;
                 break;
+            case ("vision"):
+                this.world.player.vision = true;
+                this.world.player.oneTimeVision = true;
+                break;
+            case ("insta_beam"):
+                this.world.player.insta_beam = true;
+                break;
         }
     }
 
@@ -75,6 +77,12 @@ public class PowerUp extends GameEntity {
                 break;
             case ("superspeed"):
                 this.world.player.superspeed = false;
+                break;
+            case ("vision"):
+                this.world.player.vision = false;
+                break;
+            case ("insta_beam"):
+                this.world.player.insta_beam = false;
                 break;
         }
         this.world.queueEntityRemove(this);

@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.MapObjects;
@@ -46,6 +45,10 @@ public class Player extends GameEntity {
   public boolean invincible = false;
   public boolean invisible = false;
   public boolean superspeed = false;
+  public boolean vision = false;
+  public boolean insta_beam = false;
+
+  public boolean oneTimeVision = false;
 
   private ShapeRenderer rayRenderer = new ShapeRenderer();
 
@@ -101,8 +104,14 @@ public class Player extends GameEntity {
 
 
       if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && teleporterRayCoordinates.isZero()) {
-        world.auberTeleporterCharge = Math.min(world.auberTeleporterCharge
-            + World.AUBER_CHARGE_RATE, 1f);
+        if (insta_beam) {
+          world.auberTeleporterCharge = Math.min(world.auberTeleporterCharge
+                  + World.AUBER_INSTA_BEAM_RATE, 1f);
+        }
+        else {
+          world.auberTeleporterCharge = Math.min(world.auberTeleporterCharge
+                  + World.AUBER_CHARGE_RATE, 1f);
+        }
       } else {
         if (world.auberTeleporterCharge > 0.95f) {
           world.auberTeleporterCharge = 0;
@@ -164,8 +173,6 @@ public class Player extends GameEntity {
               break;
           }
         }
-        // TODO: Remove this
-        world.spawnBuff();
       }
       // Buffs are here
       if (invincible) {
@@ -185,6 +192,17 @@ public class Player extends GameEntity {
         speed = 0.4f;
         maxSpeed = 1.2f;
       }
+      if (vision) {
+        if (oneTimeVision) {
+          oneTimeVision = false;
+          for (GameEntity infiltrator : world.getEntities()) {
+            if (infiltrator instanceof Infiltrator) {
+              ((Infiltrator) infiltrator).exposed = true;
+            }
+          }
+        }
+      }
+      // Insta beam is handled above where the left mouse button input is handled
 
       Vector2 mousePosition = Utils.getMouseCoordinates(world.camera);
 
@@ -202,10 +220,10 @@ public class Player extends GameEntity {
 
       move(velocity, World.map);
 
+      // Detect power ups near the player (within region of player sprite)
       PowerUp pu = getNearbyPowerUps(world);
       if (pu != null) {
         Gdx.app.log("near", pu.getAbility());
-        // TODO: Remove power up sprite, and apply buff. (Entity is despawned later)
         pu.applyBuff();
         pu.sprite.setAlpha(0f);
       }

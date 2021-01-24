@@ -51,9 +51,12 @@ public class Infiltrator extends Npc {
   @Override
   public void update(World world) {
     super.update(world);
-    if (exposed && !entityOnScreen(world)) {
+    if (exposed && !entityOnScreen(world) && !world.player.vision) {
       exposed = false;
       sprite = unexposedSprite;
+    }
+    else if (exposed) {
+      sprite = world.atlas.createSprite("infiltrator");
     }
   }
 
