@@ -43,6 +43,9 @@ public class Player extends GameEntity {
   public boolean slowed = false;
   public boolean blinded = false;
 
+  public boolean invincible = false;
+  public boolean invisible = false;
+
   private ShapeRenderer rayRenderer = new ShapeRenderer();
 
   public Player(float x, float y, World world) {
@@ -160,8 +163,18 @@ public class Player extends GameEntity {
               break;
           }
         }
+        // Buffs are here
         // TODO: Remove this
         world.spawnBuff();
+        if (invincible) {
+          health = 1f;
+        }
+        if (invisible) {
+          sprite.setAlpha(0.25f);
+        }
+        else {
+          sprite.setAlpha(1f);
+        }
       }
 
       Vector2 mousePosition = Utils.getMouseCoordinates(world.camera);

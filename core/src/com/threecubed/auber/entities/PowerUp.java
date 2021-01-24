@@ -54,7 +54,10 @@ public class PowerUp extends GameEntity {
         Gdx.app.log("timer", "start");
         switch (this.ability) {
             case ("invisibility"):
-                this.world.player.sprite.setAlpha(0.25f);
+                this.world.player.invisible = true;
+                break;
+            case ("invincibility"):
+                this.world.player.invincible = true;
                 break;
         }
     }
@@ -63,7 +66,10 @@ public class PowerUp extends GameEntity {
         Gdx.app.log("timer", "finished, removing buff");
         switch (this.ability) {
             case ("invisibility"):
-                this.world.player.sprite.setAlpha(1f);
+                this.world.player.invisible = false;
+                break;
+            case ("invincibility"):
+                this.world.player.invincible = false;
                 break;
         }
         this.world.queueEntityRemove(this);
