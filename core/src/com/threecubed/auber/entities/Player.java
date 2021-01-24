@@ -45,6 +45,7 @@ public class Player extends GameEntity {
 
   public boolean invincible = false;
   public boolean invisible = false;
+  public boolean superspeed = false;
 
   private ShapeRenderer rayRenderer = new ShapeRenderer();
 
@@ -163,18 +164,26 @@ public class Player extends GameEntity {
               break;
           }
         }
-        // Buffs are here
         // TODO: Remove this
         world.spawnBuff();
-        if (invincible) {
-          health = 1f;
-        }
-        if (invisible) {
-          sprite.setAlpha(0.25f);
-        }
-        else {
-          sprite.setAlpha(1f);
-        }
+      }
+      // Buffs are here
+      if (invincible) {
+        health = 1f;
+      }
+      if (invisible) {
+        sprite.setAlpha(0.25f);
+      }
+      else {
+        sprite.setAlpha(1f);
+      }
+      if (superspeed) {
+        speed = 1.6f;
+        maxSpeed = 4.8f;
+      }
+      else {
+        speed = 0.4f;
+        maxSpeed = 1.2f;
       }
 
       Vector2 mousePosition = Utils.getMouseCoordinates(world.camera);

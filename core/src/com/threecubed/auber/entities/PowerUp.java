@@ -35,7 +35,6 @@ public class PowerUp extends GameEntity {
             if (time > countdown) {
                 removeBuff();
             }
-            Gdx.app.log("timer", Float.toString(time));
         }
     }
 
@@ -48,10 +47,10 @@ public class PowerUp extends GameEntity {
     }
 
     public void applyBuff() {
-        // TODO: Start 10 sec timer, then remove after
+        // Start 10 sec timer, then remove after
         this.beginTimer = true;
         this.pickup = false;
-        Gdx.app.log("timer", "start");
+        Gdx.app.log("timer", "start " + ability);
         switch (this.ability) {
             case ("invisibility"):
                 this.world.player.invisible = true;
@@ -59,17 +58,23 @@ public class PowerUp extends GameEntity {
             case ("invincibility"):
                 this.world.player.invincible = true;
                 break;
+            case ("superspeed"):
+                this.world.player.superspeed = true;
+                break;
         }
     }
 
     public void removeBuff() {
-        Gdx.app.log("timer", "finished, removing buff");
+        Gdx.app.log("timer", "finished, removing buff " + ability);
         switch (this.ability) {
             case ("invisibility"):
                 this.world.player.invisible = false;
                 break;
             case ("invincibility"):
                 this.world.player.invincible = false;
+                break;
+            case ("superspeed"):
+                this.world.player.superspeed = false;
                 break;
         }
         this.world.queueEntityRemove(this);
