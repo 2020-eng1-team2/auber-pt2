@@ -161,7 +161,7 @@ public class World {
   public static final float INFILTRATOR_PROJECTILE_SPEED = 4f;
   /** Maximum infiltrators in a full game of Auber (including defated ones). */
   // TODO: Reset this to 8 once testing is complete
-  public static final int MAX_INFILTRATORS = 2;
+  public static final int MAX_INFILTRATORS = 8;
   /** The interval at which the infiltrator should attack the player when exposed. */
   public static final float INFILTRATOR_FIRING_INTERVAL = 5f;
   /** The damage a projectile should do. */
@@ -171,7 +171,7 @@ public class World {
    * {@link World#MAX_INFILTRATORS}.
    * */
   // TODO: Reset this back to 3 once testing is done
-  public static final int MAX_INFILTRATORS_IN_GAME = 2;
+  public static final int MAX_INFILTRATORS_IN_GAME = 3;
 
   /** The amount of variance there should be between the speeds of different NPCs. */
   public static final float[] NPC_SPEED_VARIANCE = {0.8f, 1.2f};
@@ -354,6 +354,9 @@ public class World {
           newSystem = World.Tiles.WALL_SYSTEM.getCell();
           break;
         case ATTACKED:
+          // TODO: Currently works, but could be better
+          spawnBuff();
+          spawnBuff();
           newSystem = World.Tiles.WALL_SYSTEM_ATTACKED.getCell();
           break;
         case DESTROYED:

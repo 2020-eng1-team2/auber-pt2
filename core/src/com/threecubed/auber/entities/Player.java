@@ -160,8 +160,7 @@ public class Player extends GameEntity {
               break;
           }
         }
-
-        // TODO: Write buff spawning code
+        // TODO: Remove this
         world.spawnBuff();
       }
 
@@ -184,8 +183,9 @@ public class Player extends GameEntity {
       PowerUp pu = getNearbyPowerUps(world);
       if (pu != null) {
         Gdx.app.log("near", pu.getAbility());
-        // TODO: Despawn power up, and apply buff.
-        world.queueEntityRemove(pu);
+        // TODO: Remove power up sprite, and apply buff. (Entity is despawned later)
+        pu.applyBuff();
+        pu.sprite.setAlpha(0f);
       }
     }
   }
@@ -275,7 +275,9 @@ public class Player extends GameEntity {
     for (GameEntity ent : ents) {
       if (ent instanceof PowerUp) {
         if (Intersector.overlaps(sprite.getBoundingRectangle(), ent.sprite.getBoundingRectangle())) {
-          return (PowerUp) ent;
+          if (((PowerUp) ent).canPickup()) {
+            return (PowerUp) ent;
+          }
         }
       }
     }
