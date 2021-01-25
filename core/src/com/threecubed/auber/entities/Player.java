@@ -38,16 +38,25 @@ public class Player extends GameEntity {
   /** Health of Auber - varies between 1 and 0. */
   public float health = 1;
 
+  /** True if Auber is hit with confusion */
   public boolean confused = false;
+  /** True if Auber is hit with slowness */
   public boolean slowed = false;
+  /** True if Auber is blinded */
   public boolean blinded = false;
 
+  /** True if Auber picks up invisibility */
   public boolean invincible = false;
+  /** True if Auber picks up invincibility */
   public boolean invisible = false;
+  /** True if Auber picks up super speed */
   public boolean superspeed = false;
+  /** True if Auber picks up vision */
   public boolean vision = false;
+  /** True if Auber picks up insta beam */
   public boolean insta_beam = false;
 
+  /** This is used once when {@link #vision} is activated to set all infiltrators to vulnerable */
   public boolean oneTimeVision = false;
 
   private ShapeRenderer rayRenderer = new ShapeRenderer();
