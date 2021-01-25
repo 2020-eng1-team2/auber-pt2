@@ -27,6 +27,25 @@ public class PowerUp extends GameEntity {
     public void update(World world) {
         if (beginTimer) {
             time += Gdx.graphics.getDeltaTime();
+            // This is in update so that when 2 of the same buffs are active, they won't end when the first one does
+            switch (this.ability) {
+                case ("invisibility"):
+                    this.world.player.invisible = true;
+                    break;
+                case ("invincibility"):
+                    this.world.player.invincible = true;
+                    break;
+                case ("superspeed"):
+                    this.world.player.superspeed = true;
+                    break;
+                case ("vision"):
+                    this.world.player.vision = true;
+                    this.world.player.oneTimeVision = true;
+                    break;
+                case ("insta_beam"):
+                    this.world.player.insta_beam = true;
+                    break;
+            }
             if (time > countdown) {
                 removeBuff();
             }
@@ -46,24 +65,6 @@ public class PowerUp extends GameEntity {
         this.beginTimer = true;
         this.pickup = false;
         Gdx.app.log("timer", "start " + ability);
-        switch (this.ability) {
-            case ("invisibility"):
-                this.world.player.invisible = true;
-                break;
-            case ("invincibility"):
-                this.world.player.invincible = true;
-                break;
-            case ("superspeed"):
-                this.world.player.superspeed = true;
-                break;
-            case ("vision"):
-                this.world.player.vision = true;
-                this.world.player.oneTimeVision = true;
-                break;
-            case ("insta_beam"):
-                this.world.player.insta_beam = true;
-                break;
-        }
     }
 
     public void removeBuff() {
