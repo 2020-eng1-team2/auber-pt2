@@ -29,6 +29,7 @@ public class GameUi {
   private static final int MAP_WIDTH_PIXEL_SPACE = 720;
 
   private static final Vector2 HEALTH_WARNINGS_POSITION = new Vector2(350f, 70f);
+  private static final Vector2 BUFFS_POSITION = new Vector2(50f, 1000f);
 
   private static final Vector2 SYSTEM_WARNINGS_POSITION = new Vector2(1750f, 50f);
 
@@ -75,6 +76,7 @@ public class GameUi {
     drawChargeMeter(world, screenBatch);
     drawHealthbar(world, screenBatch);
     drawHealthWarnings(world, screenBatch);
+    drawBuffs(world, screenBatch);
     drawSystemWarnings(world, screenBatch);
     drawMinimap(world, screenBatch);
   }
@@ -235,6 +237,38 @@ public class GameUi {
         miniMapSystemMarker.draw(screenBatch);
       }
     }
+    screenBatch.end();
+  }
+
+  /**
+   * Draw any buffs for Auber to the screen.
+   *
+   * @param world The game world
+   * @param screenBatch The batch to draw to
+   * */
+  private void drawBuffs(World world, SpriteBatch screenBatch) {
+    screenBatch.begin();
+    uiFont.setColor(Color.GREEN);
+    if (world.player.invisible) {
+      uiFont.draw(screenBatch, "INVISIBLE", BUFFS_POSITION.x, BUFFS_POSITION.y);
+    }
+    if (world.player.invincible) {
+      uiFont.draw(screenBatch, "INVINCIBLE", BUFFS_POSITION.x,
+              BUFFS_POSITION.y + 20f);
+    }
+    if (world.player.superspeed) {
+      uiFont.draw(screenBatch, "SUPER SPEED", BUFFS_POSITION.x,
+              BUFFS_POSITION.y + 40f);
+    }
+    if (world.player.vision) {
+      uiFont.draw(screenBatch, "INFILTRATOR VISION", BUFFS_POSITION.x,
+              BUFFS_POSITION.y + 60f);
+    }
+    if (world.player.insta_beam) {
+      uiFont.draw(screenBatch, "INSTA-BEAM", BUFFS_POSITION.x,
+              BUFFS_POSITION.y + 80f);
+    }
+    uiFont.setColor(Color.WHITE);
     screenBatch.end();
   }
 }
