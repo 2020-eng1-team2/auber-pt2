@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.threecubed.auber.World;
 
 /**
- * The power up entity that applies buffs to the player. Activated in @link "Player.java"
+ * The power up entity that applies buffs to the player. Activated in {@link Player}
  *
  * */
 public class PowerUp extends GameEntity {
