@@ -468,7 +468,12 @@ public class World {
 
   // TODO: Fix bug mentioned above
   public void spawnBuff() {
-    Vector2 spawnPos = this.getEntities().get(this.randomNumberGenerator.nextInt(this.getEntities().size())).position;
+    GameEntity ent = this.getEntities().get(this.randomNumberGenerator.nextInt(this.getEntities().size()));
+    while (!(ent instanceof Civilian)) {
+      ent = this.getEntities().get(this.randomNumberGenerator.nextInt(this.getEntities().size()));
+
+    }
+    Vector2 spawnPos = ent.position;
     PowerUp powerUpTest = new PowerUp(spawnPos.x, spawnPos.y, this, Abilities.randomAbility().toString());
     queueEntityAdd(powerUpTest);
   }
