@@ -28,9 +28,9 @@ public class PowerUp extends GameEntity {
      * @param world The game's world
      * @param ability The ability the power up is to grant
      * */
-    public PowerUp(float x, float y, World world, String ability) {
-        super(x, y, world.atlas.createSprite(ability));
-        this.ability = ability;
+    public PowerUp(float x, float y, World world, World.Abilities ability) {
+        super(x, y, world.atlas.createSprite(ability.toString()));
+        this.ability = ability.toString();
         this.world = world;
         position = new Vector2(x, y);
     }

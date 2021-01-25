@@ -193,6 +193,22 @@ public class World {
     DESTROYED
   }
 
+  public static enum Abilities {
+    superSpeed,
+    invisibility,
+    invincibility,
+    instaBeam,
+    vision;
+
+    private static final List<Abilities> ABILITIES = Collections.unmodifiableList(Arrays.asList(values()));
+    private static final int length = ABILITIES.size();
+    private static final Random rng = new Random();
+
+    public static Abilities randomAbility() {
+      return ABILITIES.get(rng.nextInt(length));
+    }
+  }
+
   /**
    * Initialise the game world.
    *
@@ -444,22 +460,6 @@ public class World {
     }
   }
 
-  public enum Abilities {
-    superspeed,
-    invisibility,
-    invincibility,
-    insta_beam,
-    vision;
-
-    private static final List<Abilities> ABILITIES = Collections.unmodifiableList(Arrays.asList(values()));
-    private static final int length = ABILITIES.size();
-    private static final Random rng = new Random();
-
-    public static Abilities randomAbility() {
-      return ABILITIES.get(rng.nextInt(length));
-    }
-  }
-
   /**
    * Spawns in a random buff in the position of a random entity (Civilians only)
    * */
@@ -471,7 +471,7 @@ public class World {
 
     }
     Vector2 spawnPos = ent.position;
-    PowerUp powerUpTest = new PowerUp(spawnPos.x, spawnPos.y, this, Abilities.randomAbility().toString());
+    PowerUp powerUpTest = new PowerUp(spawnPos.x, spawnPos.y, this, Abilities.randomAbility());
     queueEntityAdd(powerUpTest);
   }
 }
