@@ -461,12 +461,9 @@ public class World {
   }
 
   /**
-   * Spawns in a random buff in the position of a random entity (not player or other buffs)
-   *
-   * Currently broken, (buffs can spawn on player & other buffs)
+   * Spawns in a random buff in the position of a random entity (Civilians only)
    * */
 
-  // TODO: Fix bug mentioned above
   public void spawnBuff() {
     GameEntity ent = this.getEntities().get(this.randomNumberGenerator.nextInt(this.getEntities().size()));
     while (!(ent instanceof Civilian)) {
