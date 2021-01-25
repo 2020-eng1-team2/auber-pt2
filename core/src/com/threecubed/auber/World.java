@@ -465,11 +465,10 @@ public class World {
    * */
 
   public void spawnBuff() {
-    GameEntity ent = this.getEntities().get(this.randomNumberGenerator.nextInt(this.getEntities().size()));
-    while (!(ent instanceof Civilian)) {
+    GameEntity ent;
+    do {
       ent = this.getEntities().get(this.randomNumberGenerator.nextInt(this.getEntities().size()));
-
-    }
+    } while (!(ent instanceof Civilian))
     Vector2 spawnPos = ent.position;
     PowerUp powerUpTest = new PowerUp(spawnPos.x, spawnPos.y, this, Abilities.randomAbility());
     queueEntityAdd(powerUpTest);
