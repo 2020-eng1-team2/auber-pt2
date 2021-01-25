@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.threecubed.auber.World;
 
+/**
+ * The power up entity that applies buffs to the player. Activated in @link "Player.java"
+ *
+ * */
 public class PowerUp extends GameEntity {
 
     private String ability;
@@ -16,6 +20,14 @@ public class PowerUp extends GameEntity {
     private float time = 0f;
     private float countdown = 10f;
 
+    /**
+     * Initialises a power up
+     *
+     * @param x x-coord of power up
+     * @param y y-coord of power up
+     * @param world The game's world
+     * @param ability The ability the power up is to grant
+     * */
     public PowerUp(float x, float y, World world, String ability) {
         super(x, y, world.atlas.createSprite(ability));
         this.ability = ability;
@@ -23,6 +35,11 @@ public class PowerUp extends GameEntity {
         position = new Vector2(x, y);
     }
 
+    /**
+     * Ensures the power up is active throughout its duration.
+     *
+     * @param world The game's world
+     * */
     @Override
     public void update(World world) {
         if (beginTimer) {
@@ -52,14 +69,27 @@ public class PowerUp extends GameEntity {
         }
     }
 
+    /**
+     * Returns the ability in string form
+     *
+     * @return The ability of the power up
+     * */
     public String getAbility() {
         return this.ability;
     }
 
+    /**
+     * Returns the position of the power up in a Vector2
+     *
+     * @return The position of the power up
+     * */
     public Vector2 getPosition() {
         return super.position;
     }
 
+    /**
+     * Begins timer, activates power up and hides the sprite from the player
+     * */
     public void applyBuff() {
         // Start 10 sec timer, then remove after
         this.beginTimer = true;
@@ -67,6 +97,9 @@ public class PowerUp extends GameEntity {
         Gdx.app.log("timer", "start " + ability);
     }
 
+    /**
+     * Deactivates this power up and removes it from the Entity List in world
+     * */
     public void removeBuff() {
         Gdx.app.log("timer", "finished, removing buff " + ability);
         switch (this.ability) {
@@ -89,6 +122,11 @@ public class PowerUp extends GameEntity {
         this.world.queueEntityRemove(this);
     }
 
+    /**
+     * Returns the objects canPickup bool (used to detect if the player has already picked it up)
+     *
+     * @return Whether the power up can be picked up
+     * */
     public boolean canPickup() {
         return this.pickup;
     }
