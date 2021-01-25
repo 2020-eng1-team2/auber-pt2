@@ -466,11 +466,23 @@ public class World {
 
   public void spawnBuff() {
     GameEntity ent;
-    do {
-      ent = this.getEntities().get(this.randomNumberGenerator.nextInt(this.getEntities().size()));
-    } while (!(ent instanceof Civilian))
-    Vector2 spawnPos = ent.position;
-    PowerUp powerUpTest = new PowerUp(spawnPos.x, spawnPos.y, this, Abilities.randomAbility());
-    queueEntityAdd(powerUpTest);
+    boolean civExist = false;
+    for (GameEntity entity : this.getEntities()) {
+      if (entity instanceof Civilian) {
+        civExist = true;
+        break;
+      }
+    }
+    if (civExist) {
+      do {
+        ent = this.getEntities().get(this.randomNumberGenerator.nextInt(this.getEntities().size()));
+      } while (!(ent instanceof Civilian));
+      Vector2 spawnPos = ent.position;
+      PowerUp powerUpTest = new PowerUp(spawnPos.x, spawnPos.y, this, Abilities.randomAbility());
+      queueEntityAdd(powerUpTest);
+    }
+    else {
+      // No spawn possible
+    }
   }
 }
