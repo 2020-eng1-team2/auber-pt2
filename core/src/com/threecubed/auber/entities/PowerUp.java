@@ -46,20 +46,20 @@ public class PowerUp extends GameEntity {
             time += Gdx.graphics.getDeltaTime();
             // This is in update so that when 2 of the same buffs are active, they won't end when the first one does
             switch (this.ability) {
-                case ("invisibility"):
+                case ("Invisibility"):
                     this.world.player.invisible = true;
                     break;
-                case ("invincibility"):
+                case ("Invincibility"):
                     this.world.player.invincible = true;
                     break;
-                case ("superspeed"):
+                case ("SuperSpeed"):
                     this.world.player.superspeed = true;
                     break;
-                case ("vision"):
+                case ("Vision"):
                     this.world.player.vision = true;
                     this.world.player.oneTimeVision = true;
                     break;
-                case ("insta_beam"):
+                case ("InstaBeam"):
                     this.world.player.insta_beam = true;
                     break;
             }
@@ -103,19 +103,19 @@ public class PowerUp extends GameEntity {
     public void removeBuff() {
         Gdx.app.log("timer", "finished, removing buff " + ability);
         switch (this.ability) {
-            case ("invisibility"):
+            case ("Invisibility"):
                 this.world.player.invisible = false;
                 break;
-            case ("invincibility"):
+            case ("Invincibility"):
                 this.world.player.invincible = false;
                 break;
-            case ("superspeed"):
+            case ("SuperSpeed"):
                 this.world.player.superspeed = false;
                 break;
-            case ("vision"):
+            case ("Vision"):
                 this.world.player.vision = false;
                 break;
-            case ("insta_beam"):
+            case ("InstaBeam"):
                 this.world.player.insta_beam = false;
                 break;
         }

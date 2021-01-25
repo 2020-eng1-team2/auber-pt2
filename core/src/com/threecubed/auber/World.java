@@ -193,12 +193,12 @@ public class World {
     DESTROYED
   }
 
-  public static enum Abilities {
-    superSpeed,
-    invisibility,
-    invincibility,
-    instaBeam,
-    vision;
+  public enum Abilities {
+    SuperSpeed,
+    Invisibility,
+    Invincibility,
+    InstaBeam,
+    Vision;
 
     private static final List<Abilities> ABILITIES = Collections.unmodifiableList(Arrays.asList(values()));
     private static final int length = ABILITIES.size();
