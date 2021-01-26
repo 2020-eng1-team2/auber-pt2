@@ -17,6 +17,7 @@ import com.threecubed.auber.entities.*;
 import com.threecubed.auber.pathfinding.NavigationMesh;
 import com.threecubed.auber.screens.GameOverScreen;
 import com.threecubed.auber.screens.GameScreen;
+import com.threecubed.auber.Abilities;
 
 import java.util.*;
 
@@ -191,22 +192,6 @@ public class World {
     WORKING,
     ATTACKED,
     DESTROYED
-  }
-
-  public enum Abilities {
-    SuperSpeed,
-    Invisibility,
-    Invincibility,
-    InstaBeam,
-    Vision;
-
-    private static final List<Abilities> ABILITIES = Collections.unmodifiableList(Arrays.asList(values()));
-    private static final int length = ABILITIES.size();
-    private static final Random rng = new Random();
-
-    public static Abilities randomAbility() {
-      return ABILITIES.get(rng.nextInt(length));
-    }
   }
 
   /**

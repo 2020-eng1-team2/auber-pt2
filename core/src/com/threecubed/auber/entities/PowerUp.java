@@ -2,6 +2,7 @@ package com.threecubed.auber.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.threecubed.auber.Abilities;
 import com.threecubed.auber.World;
 
 /**
@@ -10,7 +11,7 @@ import com.threecubed.auber.World;
  * */
 public class PowerUp extends GameEntity {
 
-    private String ability;
+    private Abilities ability;
 
     private boolean beginTimer = false;
     private boolean pickup = true;
@@ -28,9 +29,9 @@ public class PowerUp extends GameEntity {
      * @param world The game's world
      * @param ability The ability the power up is to grant
      * */
-    public PowerUp(float x, float y, World world, World.Abilities ability) {
+    public PowerUp(float x, float y, World world, Abilities ability) {
         super(x, y, world.atlas.createSprite(ability.toString()));
-        this.ability = ability.toString();
+        this.ability = ability;
         this.world = world;
         position = new Vector2(x, y);
     }
@@ -46,20 +47,20 @@ public class PowerUp extends GameEntity {
             time += Gdx.graphics.getDeltaTime();
             // This is in update so that when 2 of the same buffs are active, they won't end when the first one does
             switch (this.ability) {
-                case ("Invisibility"):
+                case Invisibility:
                     this.world.player.invisible = true;
                     break;
-                case ("Invincibility"):
+                case Invincibility:
                     this.world.player.invincible = true;
                     break;
-                case ("SuperSpeed"):
+                case SuperSpeed:
                     this.world.player.superspeed = true;
                     break;
-                case ("Vision"):
+                case Vision:
                     this.world.player.vision = true;
                     this.world.player.oneTimeVision = true;
                     break;
-                case ("InstaBeam"):
+                case InstaBeam:
                     this.world.player.insta_beam = true;
                     break;
             }
@@ -74,7 +75,7 @@ public class PowerUp extends GameEntity {
      *
      * @return The ability of the power up
      * */
-    public String getAbility() {
+    public Abilities getAbility() {
         return this.ability;
     }
 
@@ -103,19 +104,19 @@ public class PowerUp extends GameEntity {
     public void removeBuff() {
         Gdx.app.log("timer", "finished, removing buff " + ability);
         switch (this.ability) {
-            case ("Invisibility"):
+            case Invisibility:
                 this.world.player.invisible = false;
                 break;
-            case ("Invincibility"):
+            case Invincibility:
                 this.world.player.invincible = false;
                 break;
-            case ("SuperSpeed"):
+            case SuperSpeed:
                 this.world.player.superspeed = false;
                 break;
-            case ("Vision"):
+            case Vision:
                 this.world.player.vision = false;
                 break;
-            case ("InstaBeam"):
+            case InstaBeam:
                 this.world.player.insta_beam = false;
                 break;
         }

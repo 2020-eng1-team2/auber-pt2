@@ -232,7 +232,7 @@ public class Player extends GameEntity {
       // Detect power ups near the player (within region of player sprite)
       PowerUp pu = getNearbyPowerUps(world);
       if (pu != null) {
-        Gdx.app.log("near", pu.getAbility());
+        Gdx.app.log("near", pu.getAbility().toString());
         pu.applyBuff();
         pu.sprite.setAlpha(0f);
       }
