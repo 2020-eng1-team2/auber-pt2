@@ -12,14 +12,14 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.threecubed.auber.entities.GameEntity;
-import com.threecubed.auber.entities.Player;
+import com.badlogic.gdx.math.Vector2;
+import com.threecubed.auber.entities.*;
 import com.threecubed.auber.pathfinding.NavigationMesh;
 import com.threecubed.auber.screens.GameOverScreen;
 import com.threecubed.auber.screens.GameScreen;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import com.threecubed.auber.Abilities;
+
+import java.util.*;
 
 
 /**
@@ -74,6 +74,10 @@ public class World {
   public float auberTeleporterCharge = 0f;
   /** The rate at which the teleporter ray charges. */
   public static final float AUBER_CHARGE_RATE = 0.05f;
+  /** The rate at which the teleporter ray charges during the insta_beam ability. */
+  public static final float AUBER_INSTA_BEAM_RATE = 1f;
+  /** The number of buffs which should spawn when a system is attacked. */
+  public static final int BUFFS_ON_ATTACK = 5;
   /** The time the ray should visibly render for. */
   public static final float AUBER_RAY_TIME = 0.25f;
   /** The time a debuff should last for (with the exception of blindness). */
@@ -159,7 +163,7 @@ public class World {
   public static final float INFILTRATOR_PROJECTILE_SPEED = 4f;
   /** Maximum infiltrators in a full game of Auber (including defated ones). */
   // TODO: Reset this to 8 once testing is complete
-  public static final int MAX_INFILTRATORS = 2;
+  public static final int MAX_INFILTRATORS = 3;
   /** The interval at which the infiltrator should attack the player when exposed. */
   public static final float INFILTRATOR_FIRING_INTERVAL = 5f;
   /** The damage a projectile should do. */
@@ -352,6 +356,10 @@ public class World {
           newSystem = World.Tiles.WALL_SYSTEM.getCell();
           break;
         case ATTACKED:
+          // Spawn 3 buffs randomly when system is attacked
+          for (int i = 0; i < BUFFS_ON_ATTACK; i++) {
+            spawnBuff();
+          }
           newSystem = World.Tiles.WALL_SYSTEM_ATTACKED.getCell();
           break;
         case DESTROYED:
@@ -434,6 +442,32 @@ public class World {
       }
     } else if (infiltratorCount <= 0) {
       game.setScreen(new GameOverScreen(game, true));
+    }
+  }
+
+  /**
+   * Spawns in a random buff in the position of a random entity (Civilians only)
+   * */
+
+  public void spawnBuff() {
+    GameEntity ent;
+    boolean civExist = false;
+    for (GameEntity entity : this.getEntities()) {
+      if (entity instanceof Civilian) {
+        civExist = true;
+        break;
+      }
+    }
+    if (civExist) {
+      do {
+        ent = this.getEntities().get(this.randomNumberGenerator.nextInt(this.getEntities().size()));
+      } while (!(ent instanceof Civilian));
+      Vector2 spawnPos = ent.position;
+      PowerUp powerUpTest = new PowerUp(spawnPos.x, spawnPos.y, this, Abilities.randomAbility());
+      queueEntityAdd(powerUpTest);
+    }
+    else {
+      // No spawn possible
     }
   }
 }

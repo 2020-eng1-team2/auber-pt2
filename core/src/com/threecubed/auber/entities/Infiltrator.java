@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.Timer.Task;
 import com.threecubed.auber.Utils;
 import com.threecubed.auber.World;
 
+import java.util.Random;
+
 
 /**
  * The infiltrator is the enemy of the game, it will navigate from system to system and sabotage
@@ -49,9 +51,12 @@ public class Infiltrator extends Npc {
   @Override
   public void update(World world) {
     super.update(world);
-    if (exposed && !entityOnScreen(world)) {
+    if (exposed && !entityOnScreen(world) && !world.player.vision) {
       exposed = false;
       sprite = unexposedSprite;
+    }
+    else if (exposed) {
+      sprite = world.atlas.createSprite("infiltrator");
     }
   }
 
@@ -159,6 +164,11 @@ public class Infiltrator extends Npc {
   private void fireProjectileAtPlayer(World world) {
     Vector2 projectileVelocity = new Vector2(world.player.position.x - position.x,
                                              world.player.position.y - position.y);
+    if (world.player.invisible) {
+      Random rng = new Random();
+      projectileVelocity = new Vector2((float) rng.nextInt(100),
+              (float) rng.nextInt(100));
+    }
     projectileVelocity.setLength(World.INFILTRATOR_PROJECTILE_SPEED);
     Projectile projectile = new Projectile(getCenterX(), getCenterY(), projectileVelocity, this,
         Projectile.CollisionActions.randomAction(), world);

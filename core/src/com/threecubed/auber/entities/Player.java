@@ -12,12 +12,15 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.threecubed.auber.Utils;
 import com.threecubed.auber.World;
 import com.threecubed.auber.pathfinding.NavigationMesh;
+
+import java.util.List;
 
 
 /**
@@ -35,9 +38,26 @@ public class Player extends GameEntity {
   /** Health of Auber - varies between 1 and 0. */
   public float health = 1;
 
+  /** True if Auber is hit with confusion */
   public boolean confused = false;
+  /** True if Auber is hit with slowness */
   public boolean slowed = false;
+  /** True if Auber is blinded */
   public boolean blinded = false;
+
+  /** True if Auber picks up invisibility */
+  public boolean invincible = false;
+  /** True if Auber picks up invincibility */
+  public boolean invisible = false;
+  /** True if Auber picks up super speed */
+  public boolean superspeed = false;
+  /** True if Auber picks up vision */
+  public boolean vision = false;
+  /** True if Auber picks up insta beam */
+  public boolean insta_beam = false;
+
+  /** This is used once when {@link #vision} is activated to set all infiltrators to vulnerable */
+  public boolean oneTimeVision = false;
 
   private ShapeRenderer rayRenderer = new ShapeRenderer();
 
@@ -93,8 +113,14 @@ public class Player extends GameEntity {
 
 
       if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && teleporterRayCoordinates.isZero()) {
-        world.auberTeleporterCharge = Math.min(world.auberTeleporterCharge
-            + World.AUBER_CHARGE_RATE, 1f);
+        if (insta_beam) {
+          world.auberTeleporterCharge = Math.min(world.auberTeleporterCharge
+                  + World.AUBER_INSTA_BEAM_RATE, 1f);
+        }
+        else {
+          world.auberTeleporterCharge = Math.min(world.auberTeleporterCharge
+                  + World.AUBER_CHARGE_RATE, 1f);
+        }
       } else {
         if (world.auberTeleporterCharge > 0.95f) {
           world.auberTeleporterCharge = 0;
@@ -157,6 +183,35 @@ public class Player extends GameEntity {
           }
         }
       }
+      // Buffs are here
+      if (invincible) {
+        health = 1f;
+      }
+      if (invisible) {
+        sprite.setAlpha(0.25f);
+      }
+      else {
+        sprite.setAlpha(1f);
+      }
+      if (superspeed) {
+        speed = 1.6f;
+        maxSpeed = 4.8f;
+      }
+      else {
+        speed = 0.4f;
+        maxSpeed = 1.2f;
+      }
+      if (vision) {
+        if (oneTimeVision) {
+          oneTimeVision = false;
+          for (GameEntity infiltrator : world.getEntities()) {
+            if (infiltrator instanceof Infiltrator) {
+              ((Infiltrator) infiltrator).exposed = true;
+            }
+          }
+        }
+      }
+      // Insta beam is handled above where the left mouse button input is handled
 
       Vector2 mousePosition = Utils.getMouseCoordinates(world.camera);
 
@@ -172,7 +227,15 @@ public class Player extends GameEntity {
         velocity.set(-velocity.x, -velocity.y);
       }
 
-      move(velocity, World.map);  
+      move(velocity, World.map);
+
+      // Detect power ups near the player (within region of player sprite)
+      PowerUp pu = getNearbyPowerUps(world);
+      if (pu != null) {
+        Gdx.app.log("near", pu.getAbility().toString());
+        pu.applyBuff();
+        pu.sprite.setAlpha(0f);
+      }
     }
   }
 
@@ -248,5 +311,25 @@ public class Player extends GameEntity {
       alpha += 0.1f;
     }
     return output;
+  }
+
+  /**
+   * Checks if the player has walked over an ability orb, works on dynamically spawned objects.
+   *
+   * @param world The game world
+   * @return The object the player walked over
+   * */
+  public PowerUp getNearbyPowerUps(World world) {
+    List<GameEntity> ents = world.getEntities();
+    for (GameEntity ent : ents) {
+      if (ent instanceof PowerUp) {
+        if (Intersector.overlaps(sprite.getBoundingRectangle(), ent.sprite.getBoundingRectangle())) {
+          if (((PowerUp) ent).canPickup()) {
+            return (PowerUp) ent;
+          }
+        }
+      }
+    }
+    return null;
   }
 }
