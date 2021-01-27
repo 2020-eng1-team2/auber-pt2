@@ -19,12 +19,12 @@ public class PowerUpTest {
     PowerUp powerUp = new PowerUp(xIn, yIn, wrld, abilityCheck);
 
     @Test
-    public void AbilityTest() {
+    public void getAbilityTest() {
         assertEquals(abilityCheck, powerUp.getAbility());
     }
 
     @Test
-    public void positionTest() {
+    public void getPositionTest() {
         assertEquals(new Vector2(xIn, yIn), powerUp.getPosition());
     }
 }
