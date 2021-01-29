@@ -28,7 +28,7 @@ public class MenuUI {
   AuberGame game;
 
   Button playButton;
-  Button demoButton;
+  Button diffButton;
   OrthogonalTiledMapRenderer renderer;
   Sprite instructions;
   Sprite title;
@@ -66,7 +66,8 @@ public class MenuUI {
       }
     };
 
-    demoButton = new Button(
+    // repurpose this button
+    diffButton = new Button(
         new Vector2(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 2 - 150f),
         1f, game.atlas.createSprite("demoButton"), game, onDemoClick);
   }
@@ -83,7 +84,7 @@ public class MenuUI {
     title.draw(spriteBatch);
 
     playButton.render(spriteBatch);
-    demoButton.render(spriteBatch);
+    diffButton.render(spriteBatch);
 
     spriteBatch.end();
   }
