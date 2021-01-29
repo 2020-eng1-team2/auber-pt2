@@ -56,7 +56,7 @@ public class MenuUI {
     };
 
     playButton = new Button(
-        new Vector2(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 2),
+        new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 4),
         1f, game.atlas.createSprite("playButton"), game, onPlayClick);
 
     Runnable onDemoClick = new Runnable() {
@@ -68,7 +68,7 @@ public class MenuUI {
 
     // repurpose this button
     diffButton = new Button(
-        new Vector2(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 2 - 150f),
+        new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 4 - 150f),
         1f, game.atlas.createSprite("demoButton"), game, onDemoClick);
   }
 
@@ -76,11 +76,11 @@ public class MenuUI {
 
     spriteBatch.begin();
 
-    instructions.setPosition(900f, 125f);
-    instructions.draw(spriteBatch);
+    // instructions.setPosition(900f, 125f);
+    // instructions.draw(spriteBatch);
 
     title.setScale(0.5f);
-    title.setPosition(0f, 550f);
+    title.setPosition(-200f, 600f);
     title.draw(spriteBatch);
 
     playButton.render(spriteBatch);
