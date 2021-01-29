@@ -103,6 +103,9 @@ public class MenuScreen extends ScreenAdapter {
       world.queueEntityAdd(newInfiltrator);
       world.infiltratorsAddedCount++;
     }
+    // TODO: Make this more elegant
+    // This is what causes the camera to follow an NPC in demo mode (title screen)
+    world.player.position = world.getEntities().get(world.NPC_COUNT - 1).position;
 
     // Draw the UI
     ui.render(world, screenBatch);

@@ -246,8 +246,7 @@ public class World {
 
   /**
    * Initialise an instance of the world with the given game object.
-   * Demo mode locks the player to the center of the screen, makes them invisible and expands the
-   * camera to view the whole map.
+   * Demo mode locks the player to an NPC.
    *
    * @param game The game object
    * @param demoMode Whether to run the game in demo mode
@@ -256,11 +255,8 @@ public class World {
     this(game);
     this.demoMode = demoMode;
     if (demoMode) {
-      camera.setToOrtho(false, 1920, 1080);
-      TiledMapTileLayer layer = ((TiledMapTileLayer) map.getLayers().get(2));
-      player.position.x = (layer.getWidth() * layer.getTileWidth()) / 2;
-      player.position.y = (layer.getHeight() * layer.getTileHeight()) / 2;
-      player.sprite.setColor(1f, 1f, 1f, 0f);
+      camera.setToOrtho(false, 480, 270);
+      camera.update();
     }
   }
 
