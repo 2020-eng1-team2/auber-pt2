@@ -77,7 +77,7 @@ public class World {
   /** The rate at which the teleporter ray charges during the insta_beam ability. */
   public static final float AUBER_INSTA_BEAM_RATE = 1f;
   /** The number of buffs which should spawn when a system is attacked. */
-  public static final int BUFFS_ON_ATTACK = 5;
+  public static int BUFFS_ON_ATTACK = 5;
   /** The time the ray should visibly render for. */
   public static final float AUBER_RAY_TIME = 0.25f;
   /** The time a debuff should last for (with the exception of blindness). */
@@ -257,6 +257,8 @@ public class World {
     if (demoMode) {
       camera.setToOrtho(false, 480, 270);
       camera.update();
+      // Ensure no drops
+      BUFFS_ON_ATTACK = 0;
     }
   }
 
