@@ -6,28 +6,28 @@ filter: Nearest,Nearest
 repeat: none
 InstaBeam
   rotate: false
-  xy: 758, 88
+  xy: 1924, 2013
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 alienA
   rotate: false
-  xy: 1868, 931
+  xy: 1886, 949
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 alienB
   rotate: false
-  xy: 1924, 2013
+  xy: 1942, 2031
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 alienC
   rotate: false
-  xy: 1672, 304
+  xy: 1838, 118
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -55,35 +55,35 @@ auber_logo
   index: -1
 easyButton
   rotate: false
-  xy: 1168, 116
-  size: 300, 100
-  orig: 300, 100
+  xy: 1268, 116
+  size: 400, 100
+  orig: 400, 100
   offset: 0, 0
   index: -1
 easyButtonPressed
   rotate: false
   xy: 866, 218
-  size: 300, 100
-  orig: 300, 100
+  size: 400, 100
+  orig: 400, 100
   offset: 0, 0
   index: -1
 hardButton
   rotate: false
   xy: 866, 116
-  size: 300, 100
-  orig: 300, 100
+  size: 400, 100
+  orig: 400, 100
   offset: 0, 0
   index: -1
 hardButtonPressed
   rotate: false
-  xy: 1168, 218
-  size: 300, 100
-  orig: 300, 100
+  xy: 1268, 218
+  size: 400, 100
+  orig: 400, 100
   offset: 0, 0
   index: -1
 infiltrator
   rotate: false
-  xy: 1942, 2031
+  xy: 1868, 931
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -97,70 +97,70 @@ instructions
   index: -1
 invincibility
   rotate: false
-  xy: 1470, 118
+  xy: 806, 88
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 invisibility
   rotate: false
-  xy: 1656, 288
+  xy: 1822, 102
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 minimapTexture
   rotate: false
-  xy: 1470, 134
+  xy: 1670, 134
   size: 184, 184
   orig: 184, 184
   offset: 0, 0
   index: -1
 mm_indicator
   rotate: false
-  xy: 1486, 118
+  xy: 822, 88
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 mm_system_indicator
   rotate: false
-  xy: 758, 72
+  xy: 1924, 1997
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 placeholder
   rotate: false
-  xy: 606, 2
+  xy: 1670, 32
   size: 150, 100
   orig: 150, 100
   offset: 0, 0
   index: -1
 playButton
   rotate: false
-  xy: 304, 2
-  size: 300, 100
-  orig: 300, 100
+  xy: 404, 2
+  size: 400, 100
+  orig: 400, 100
   offset: 0, 0
   index: -1
 playButtonPressed
   rotate: false
   xy: 2, 2
-  size: 300, 100
-  orig: 300, 100
+  size: 400, 100
+  orig: 400, 100
   offset: 0, 0
   index: -1
 player
   rotate: false
-  xy: 1656, 304
+  xy: 1822, 118
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 projectile
   rotate: false
-  xy: 866, 106
+  xy: 1856, 310
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
@@ -174,14 +174,14 @@ stars
   index: -1
 superspeed
   rotate: false
-  xy: 1886, 949
+  xy: 806, 72
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 vision
   rotate: false
-  xy: 774, 88
+  xy: 1958, 2031
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
