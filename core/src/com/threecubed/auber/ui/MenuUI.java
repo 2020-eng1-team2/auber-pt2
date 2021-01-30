@@ -55,9 +55,10 @@ public class MenuUI {
       }
     };
 
+    // Button sprites are now drawn from the bottom left rather than center
     playButton = new Button(
-        new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 4),
-        1f, game.atlas.createSprite("playButton"), game, onPlayClick);
+        new Vector2(0f, Gdx.graphics.getHeight() / 4),
+        1f, game.atlas.createSprite("playButton"), game.atlas.createSprite("playButtonPressed"), game, onPlayClick);
 
     Runnable onDemoClick = new Runnable() {
       @Override
@@ -68,16 +69,13 @@ public class MenuUI {
 
     // repurpose this button
     diffButton = new Button(
-        new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 4 - 150f),
-        1f, game.atlas.createSprite("demoButton"), game, onDemoClick);
+        new Vector2(0f, Gdx.graphics.getHeight() / 4 - 150f),
+        1f, game.atlas.createSprite("easyButton"), game.atlas.createSprite("easyButtonPressed"), game, onDemoClick);
   }
 
   public void render(World world, SpriteBatch spriteBatch) {
 
     spriteBatch.begin();
-
-    // instructions.setPosition(900f, 125f);
-    // instructions.draw(spriteBatch);
 
     title.setScale(0.5f);
     title.setPosition(-200f, 600f);

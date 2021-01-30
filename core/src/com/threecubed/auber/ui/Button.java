@@ -19,6 +19,8 @@ import com.threecubed.auber.AuberGame;
 public class Button {
   Pixmap pixmap;
   Sprite sprite;
+  Sprite spritePressed;
+  Sprite spriteNotPressed;
   AuberGame game;
   Vector2 position;
   Runnable onClick;
@@ -29,16 +31,26 @@ public class Button {
    *
    * @param position The position to render the center of the button at
    * @param scale The scale to render the button with
-   * @param sprite The sprite of the button
+   * @param spriteNotPressed The sprite of the button normally
+   * @param spritePressed The sprite of the button when the cursor is hovering over it
    * @param game The game object
    * @param onClick The code to execute when the button is pressed wrapped in a {@link Runnable}
    * */
-  public Button(Vector2 position, float scale, Sprite sprite, AuberGame game, Runnable onClick) {
-    this.sprite = sprite;
+  public Button(Vector2 position, float scale, Sprite spriteNotPressed, Sprite spritePressed, AuberGame game, Runnable onClick) {
+    this.spriteNotPressed = spriteNotPressed;
+    this.spritePressed = spritePressed;
     this.onClick = onClick;
 
+    this.spritePressed.setScale(scale);
+    this.spritePressed.setPosition(position.x, position.y);
+
+    this.spriteNotPressed.setScale(scale);
+    this.spriteNotPressed.setPosition(position.x, position.y);
+
+    this.sprite = this.spriteNotPressed;
+
     sprite.setScale(scale);
-    sprite.setPosition(position.x - (sprite.getWidth() / 2), position.y - (sprite.getHeight() / 2));
+    sprite.setPosition(position.x, position.y);
 
     this.position = new Vector2(sprite.getX(), sprite.getY());
     this.game = game;
@@ -54,12 +66,14 @@ public class Button {
 
     if (sprite.getBoundingRectangle().contains(Gdx.input.getX(),
           Gdx.graphics.getHeight() - Gdx.input.getY())) {
-      sprite.setScale(1.05f);
+      // Mouse over (change sprite)
+      sprite = this.spritePressed;
       if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
         onClick.run();
       }
     } else {
-      sprite.setScale(1.0f);
+      // Mouse not over, reset sprite
+      sprite = this.spriteNotPressed;
     }
   }
 }
