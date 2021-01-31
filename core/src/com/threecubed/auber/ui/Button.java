@@ -68,7 +68,7 @@ public class Button {
           Gdx.graphics.getHeight() - Gdx.input.getY())) {
       // Mouse over (change sprite)
       sprite = this.spritePressed;
-      if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+      if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
         onClick.run();
       }
     } else {

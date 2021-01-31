@@ -28,11 +28,13 @@ public class MenuUI {
   AuberGame game;
 
   Button playButton;
-  Button diffButton;
+  Button easyDiffButton;
+  Button hardDiffButton;
   OrthogonalTiledMapRenderer renderer;
   Sprite instructions;
   Sprite title;
   SpriteBatch spriteBatch;
+  Difficulties difficulty = Difficulties.Easy;
 
   /**
    * Instantiate the screen with the {@link AuberGame} object. Set the title and button up to be
@@ -60,17 +62,20 @@ public class MenuUI {
         new Vector2(0f, Gdx.graphics.getHeight() / 4),
         1f, game.atlas.createSprite("playButton"), game.atlas.createSprite("playButtonPressed"), game, onPlayClick);
 
-    Runnable onDemoClick = new Runnable() {
+    Runnable onDiffClick = new Runnable() {
       @Override
       public void run() {
-        game.setScreen(new GameScreen(game, true));
+        difficulty = difficulty.nextDifficulty(difficulty);
       }
     };
 
-    // repurpose this button
-    diffButton = new Button(
+    easyDiffButton = new Button(
         new Vector2(0f, Gdx.graphics.getHeight() / 4 - 150f),
-        1f, game.atlas.createSprite("easyButton"), game.atlas.createSprite("easyButtonPressed"), game, onDemoClick);
+        1f, game.atlas.createSprite("easyButton"), game.atlas.createSprite("easyButtonPressed"), game, onDiffClick);
+
+    hardDiffButton = new Button(
+            new Vector2(0f, Gdx.graphics.getHeight() / 4 - 150f),
+            1f, game.atlas.createSprite("hardButton"), game.atlas.createSprite("hardButtonPressed"), game, onDiffClick);
   }
 
   public void render(World world, SpriteBatch spriteBatch) {
@@ -82,7 +87,12 @@ public class MenuUI {
     title.draw(spriteBatch);
 
     playButton.render(spriteBatch);
-    diffButton.render(spriteBatch);
+    if (difficulty == Difficulties.Easy) {
+      easyDiffButton.render(spriteBatch);
+    }
+    else {
+      hardDiffButton.render(spriteBatch);
+    }
 
     spriteBatch.end();
   }
