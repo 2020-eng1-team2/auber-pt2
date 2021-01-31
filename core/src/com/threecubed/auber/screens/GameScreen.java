@@ -16,7 +16,7 @@ import com.threecubed.auber.entities.Infiltrator;
 import com.threecubed.auber.entities.Player;
 import com.threecubed.auber.ui.Difficulties;
 import com.threecubed.auber.ui.GameUi;
-import com.threecubed.auber.screens.MenuScreen;
+import com.threecubed.auber.ui.PauseUI;
 
 
 /**
@@ -31,8 +31,11 @@ public class GameScreen extends ScreenAdapter {
   public AuberGame game;
   Sprite stars;
 
+  public static boolean paused = false;
+
   SpriteBatch screenBatch = new SpriteBatch();
   GameUi ui;
+  PauseUI pauseUi;
 
   int workingSystems = 0;
 
@@ -45,6 +48,7 @@ public class GameScreen extends ScreenAdapter {
   public GameScreen(AuberGame game, boolean demoMode) {
     this.game = game;
     ui = new GameUi(game);
+    pauseUi = new PauseUI(game);
 
     world = new World(game, demoMode);
 
@@ -59,9 +63,16 @@ public class GameScreen extends ScreenAdapter {
     stars = game.atlas.createSprite("stars");
   }
 
+  /**
+   * Initialise the game screen with the {@link AuberGame} object and add a few entities.
+   *
+   * @param game The game object
+   * @param diff Difficulty of the game
+   * */
   public GameScreen(AuberGame game, Difficulties diff) {
     this.game = game;
     ui = new GameUi(game);
+    pauseUi = new PauseUI(game);
 
     world = new World(game, diff);
 
@@ -78,8 +89,9 @@ public class GameScreen extends ScreenAdapter {
 
   @Override
   public void render(float delta) {
-    if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-      game.setScreen(new MenuScreen(game));
+    if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+      // Pause game, not end game
+      this.paused = !this.paused;
     }
     // Add any queued entities
     world.updateEntities();
@@ -95,42 +107,50 @@ public class GameScreen extends ScreenAdapter {
     OrthogonalTiledMapRenderer renderer = world.renderer;
     renderer.setView(world.camera);
     renderer.render(world.backgroundLayersIds);
+    if (!this.paused) {
+      Batch batch = renderer.getBatch();
+      // Iterate over all entities. Perform movement logic and render them.
+      batch.begin();
+      world.infiltratorCount = 0;
+      for (GameEntity entity : world.getEntities()) {
+        entity.update(world);
+        entity.render(batch, world.camera);
 
-
-    Batch batch = renderer.getBatch();
-    // Iterate over all entities. Perform movement logic and render them.
-    batch.begin();
-    world.infiltratorCount = 0;
-    for (GameEntity entity : world.getEntities()) {
-      entity.update(world);
-      entity.render(batch, world.camera);
-
-      if (entity instanceof Player) {
-        world.camera.position.set(entity.position.x, entity.position.y, 0);
-        world.camera.update();
-      } else if (entity instanceof Infiltrator) {
-        Infiltrator infiltrator = (Infiltrator) entity;
-        if (infiltrator.aiEnabled) {
-          world.infiltratorCount += 1;
+        if (entity instanceof Player) {
+          world.camera.position.set(entity.position.x, entity.position.y, 0);
+          world.camera.update();
+        } else if (entity instanceof Infiltrator) {
+          Infiltrator infiltrator = (Infiltrator) entity;
+          if (infiltrator.aiEnabled) {
+            world.infiltratorCount += 1;
+          }
         }
       }
-    }
-    batch.end();
-    renderer.render(world.foregroundLayersIds);
+      batch.end();
+      renderer.render(world.foregroundLayersIds);
 
-    if (world.infiltratorCount < World.MAX_INFILTRATORS_IN_GAME
-        && world.infiltratorsAddedCount < World.MAX_INFILTRATORS) {
-      Infiltrator newInfiltrator = new Infiltrator(world);
-      while (newInfiltrator.entityOnScreen(world)) {
-        newInfiltrator.moveToRandomLocation(world);
+      if (world.infiltratorCount < World.MAX_INFILTRATORS_IN_GAME
+              && world.infiltratorsAddedCount < World.MAX_INFILTRATORS) {
+        Infiltrator newInfiltrator = new Infiltrator(world);
+        while (newInfiltrator.entityOnScreen(world)) {
+          newInfiltrator.moveToRandomLocation(world);
+        }
+        world.queueEntityAdd(newInfiltrator);
+        world.infiltratorsAddedCount++;
       }
-      world.queueEntityAdd(newInfiltrator);
-      world.infiltratorsAddedCount++;
-    }
 
-    // Draw the UI
-    ui.render(world, screenBatch);
-    world.checkForEndState();
+      // Draw the UI
+      ui.render(world, screenBatch);
+      world.checkForEndState();
+    }
+    else {
+      // game is paused,
+      // Draw pause menu UI
+
+      renderer.render(world.foregroundLayersIds);
+
+      pauseUi.render(world, screenBatch);
+    }
   }
 
   @Override
