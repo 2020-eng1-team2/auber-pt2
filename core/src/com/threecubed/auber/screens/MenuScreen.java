@@ -13,6 +13,7 @@ import com.threecubed.auber.entities.Civilian;
 import com.threecubed.auber.entities.GameEntity;
 import com.threecubed.auber.entities.Infiltrator;
 import com.threecubed.auber.entities.Player;
+import com.threecubed.auber.ui.Difficulties;
 import com.threecubed.auber.ui.MenuUI;
 
 
@@ -30,6 +31,8 @@ public class MenuScreen extends ScreenAdapter {
 
   SpriteBatch screenBatch = new SpriteBatch();
   MenuUI ui;
+
+  public static Difficulties difficulty = Difficulties.Easy;
 
   int workingSystems = 0;
 

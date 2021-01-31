@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.threecubed.auber.AuberGame;
 import com.threecubed.auber.World;
 import com.threecubed.auber.screens.GameScreen;
+import com.threecubed.auber.screens.MenuScreen;
 import com.threecubed.auber.ui.Button;
 
 
@@ -35,7 +36,6 @@ public class MenuUI {
   Sprite instructions;
   Sprite title;
   SpriteBatch spriteBatch;
-  Difficulties difficulty = Difficulties.Easy;
 
   /**
    * Instantiate the screen with the {@link AuberGame} object. Set the title and button up to be
@@ -54,7 +54,7 @@ public class MenuUI {
     Runnable onPlayClick = new Runnable() {
       @Override
       public void run() {
-        game.setScreen(new GameScreen(game, difficulty));
+        game.setScreen(new GameScreen(game, MenuScreen.difficulty));
       }
     };
 
@@ -66,7 +66,7 @@ public class MenuUI {
     Runnable onDiffClick = new Runnable() {
       @Override
       public void run() {
-        difficulty = difficulty.nextDifficulty(difficulty);
+        MenuScreen.difficulty = MenuScreen.difficulty.nextDifficulty(MenuScreen.difficulty);
       }
     };
 
@@ -102,7 +102,7 @@ public class MenuUI {
 
     playButton.render(spriteBatch);
     loadButton.render(spriteBatch);
-    if (difficulty == Difficulties.Easy) {
+    if (MenuScreen.difficulty == Difficulties.Easy) {
       easyDiffButton.render(spriteBatch);
     }
     else {
