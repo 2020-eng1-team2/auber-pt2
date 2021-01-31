@@ -1,5 +1,6 @@
 package com.threecubed.auber.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Circle;
@@ -117,6 +118,16 @@ public class Infiltrator extends Npc {
    * */
   private void attackNearbySystem(final World world) {
     state = States.ATTACKING_SYSTEM;
+
+    // Buffs are now spawned here due to glitch with different difficulties
+    //Gdx.app.log("system", "attack");
+    if (!world.demoMode) {
+      for (int i = 0; i < world.BUFFS_ON_ATTACK; i++) {
+        //Gdx.app.log("buff", "spawn buff");
+        world.spawnBuff();
+      }
+    }
+    //Gdx.app.log("system", "attacked");
 
     final RectangleMapObject system = getNearbyObjects(World.map);
     if (system != null) {

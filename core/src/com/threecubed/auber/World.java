@@ -1,5 +1,6 @@
 package com.threecubed.auber;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -77,8 +78,8 @@ public class World {
   public static final float AUBER_CHARGE_RATE = 0.05f;
   /** The rate at which the teleporter ray charges during the insta_beam ability. */
   public static final float AUBER_INSTA_BEAM_RATE = 1f;
-  /** The number of buffs which should spawn when a system is attacked. */
-  public static int BUFFS_ON_ATTACK = 5;
+  /** The number of buffs which should spawn when a system is attacked. (Affected by game difficulty)*/
+  public int BUFFS_ON_ATTACK = 5;
   /** The time the ray should visibly render for. */
   public static final float AUBER_RAY_TIME = 0.25f;
   /** The time a debuff should last for (with the exception of blindness). */
@@ -218,14 +219,15 @@ public class World {
     if (diff == Difficulties.Hard) {
       // Game in hard mode
       // Less buffs are dropped for auber
-      BUFFS_ON_ATTACK = 2;
+      this.BUFFS_ON_ATTACK = 2;
       // Buffs last less time
-      AUBER_BUFF_TIME = 6f;
+      this.AUBER_BUFF_TIME = 6f;
       // Infiltrators attack more often
-      INFILTRATOR_FIRING_INTERVAL = 3f;
+      this.INFILTRATOR_FIRING_INTERVAL = 3f;
       // Infiltrators attempt to sabotage more
-      SYSTEM_SABOTAGE_CHANCE = 0.8f;
+      this.SYSTEM_SABOTAGE_CHANCE = 0.8f;
     }
+    // Easy by default
 
     MapObjects objects = map.getLayers().get("object_layer").getObjects();
     for (MapObject object : objects) {
@@ -249,7 +251,7 @@ public class World {
       for (int x = 0; x < navigationLayer.getWidth(); x++) {
         Cell currentCell = navigationLayer.getCell(x, y);
         float[] cellCoordinates = {x * navigationLayer.getTileWidth(),
-                                   y * navigationLayer.getTileHeight()};
+                y * navigationLayer.getTileHeight()};
         if (currentCell != null) {
           spawnLocations.add(cellCoordinates);
           if (currentCell.getTile().getId() == Tiles.FLEE_POINT.tileId) {
@@ -323,8 +325,6 @@ public class World {
     if (demoMode) {
       camera.setToOrtho(false, 480, 270);
       camera.update();
-      // Ensure no drops
-      BUFFS_ON_ATTACK = 0;
     }
   }
 
@@ -420,10 +420,6 @@ public class World {
           newSystem = World.Tiles.WALL_SYSTEM.getCell();
           break;
         case ATTACKED:
-          // Spawn 3 buffs randomly when system is attacked
-          for (int i = 0; i < BUFFS_ON_ATTACK; i++) {
-            spawnBuff();
-          }
           newSystem = World.Tiles.WALL_SYSTEM_ATTACKED.getCell();
           break;
         case DESTROYED:
