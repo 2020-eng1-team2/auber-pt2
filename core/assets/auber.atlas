@@ -97,7 +97,7 @@ easyButtonPressed
   index: -1
 hardButton
   rotate: false
-  xy: 1454, 116
+  xy: 1610, 14
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
@@ -114,13 +114,6 @@ instructions
   xy: 2, 104
   size: 862, 859
   orig: 862, 859
-  offset: 0, 0
-  index: -1
-loadButton
-  rotate: false
-  xy: 1610, 14
-  size: 400, 100
-  orig: 400, 100
   offset: 0, 0
   index: -1
 minimapTexture
@@ -172,6 +165,13 @@ playButtonPressed
   orig: 400, 100
   offset: 0, 0
   index: -1
+playButtonRight
+  rotate: false
+  xy: 1610, 218
+  size: 400, 100
+  orig: 400, 100
+  offset: 0, 0
+  index: -1
 player
   rotate: false
   xy: 1960, 2031
@@ -188,7 +188,7 @@ projectile
   index: -1
 saveButtonPressed
   rotate: false
-  xy: 1610, 218
+  xy: 1454, 116
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
@@ -215,14 +215,14 @@ filter: Nearest,Nearest
 repeat: none
 backButtonPressed
   rotate: false
-  xy: 806, 308
+  xy: 2, 2
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 easyButton
   rotate: false
-  xy: 1284, 1548
+  xy: 2, 104
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
@@ -243,63 +243,77 @@ guide2
   index: -1
 hardButtonPressed
   rotate: false
-  xy: 404, 308
+  xy: 1284, 1548
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
-loadButtonPressed
-  rotate: false
-  xy: 2, 206
-  size: 400, 100
-  orig: 400, 100
-  offset: 0, 0
-  index: -1
-nextButtonPressed
-  rotate: false
-  xy: 1284, 1650
-  size: 400, 100
-  orig: 400, 100
-  offset: 0, 0
-  index: -1
-quitButton
-  rotate: false
-  xy: 404, 206
-  size: 400, 100
-  orig: 400, 100
-  offset: 0, 0
-  index: -1
-quitButtonPressed
-  rotate: false
-  xy: 2, 104
-  size: 400, 100
-  orig: 400, 100
-  offset: 0, 0
-  index: -1
-resumeButton
+loadButton
   rotate: false
   xy: 1284, 1752
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
-resumeButtonPressed
+loadButtonPressed
   rotate: false
-  xy: 2, 308
+  xy: 404, 308
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
-saveButton
+nextButtonPressed
+  rotate: false
+  xy: 2, 206
+  size: 400, 100
+  orig: 400, 100
+  offset: 0, 0
+  index: -1
+playButtonRightPressed
+  rotate: false
+  xy: 404, 206
+  size: 400, 100
+  orig: 400, 100
+  offset: 0, 0
+  index: -1
+quitButton
   rotate: false
   xy: 1284, 1446
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
+quitButtonPressed
+  rotate: false
+  xy: 806, 308
+  size: 400, 100
+  orig: 400, 100
+  offset: 0, 0
+  index: -1
+resumeButton
+  rotate: false
+  xy: 2, 308
+  size: 400, 100
+  orig: 400, 100
+  offset: 0, 0
+  index: -1
+resumeButtonPressed
+  rotate: false
+  xy: 1284, 1650
+  size: 400, 100
+  orig: 400, 100
+  offset: 0, 0
+  index: -1
+saveButton
+  rotate: false
+  xy: 404, 104
+  size: 400, 100
+  orig: 400, 100
+  offset: 0, 0
+  index: -1
 startButton
   rotate: false
-  xy: 2, 2
+  xy: 806, 206
   size: 400, 100
   orig: 400, 100
   offset: 0, 0

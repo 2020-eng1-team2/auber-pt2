@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.threecubed.auber.AuberGame;
 import com.threecubed.auber.screens.MenuScreen;
+import com.threecubed.auber.ui.GameOverUI;
 
 
 /**
@@ -24,8 +25,9 @@ public class GameOverScreen extends ScreenAdapter {
 
   BitmapFont font = new BitmapFont();
   SpriteBatch batch = new SpriteBatch();
-  GlyphLayout layout = new GlyphLayout();
-  String resultText;
+
+  GameOverUI gameOverUi;
+  public boolean userWon;
 
   /**
    * Instantiate the screen with an {@link AuberGame} object.
@@ -37,14 +39,9 @@ public class GameOverScreen extends ScreenAdapter {
     this.game = game;
     font.getData().setScale(2);
 
-    resultText = "Game Over, you ";
-    if (userWon) {
-      resultText += "win!";
-    } else {
-      resultText += "lose.";
-    }
-    resultText += "\nPress \"Escape\" to return to the menu";
-    layout.setText(font, resultText);
+    this.userWon = userWon;
+
+    gameOverUi = new GameOverUI(game);
   }
 
   @Override
@@ -57,9 +54,16 @@ public class GameOverScreen extends ScreenAdapter {
       game.setScreen(new MenuScreen(game));
     }
 
+    // Draw UI
+    gameOverUi.render(batch);
+
     batch.begin();
-    font.draw(batch, resultText, (Gdx.graphics.getWidth() - layout.width) / 2,
-        300 + (Gdx.graphics.getHeight() - layout.height) / 2);
+    if (userWon) {
+      font.draw(batch, "YOU WON!", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+    }
+    else {
+      font.draw(batch, "YOU LOST!", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+    }
     batch.end();
   }
   
