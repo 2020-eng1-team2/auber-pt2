@@ -14,6 +14,7 @@ import com.threecubed.auber.entities.Civilian;
 import com.threecubed.auber.entities.GameEntity;
 import com.threecubed.auber.entities.Infiltrator;
 import com.threecubed.auber.entities.Player;
+import com.threecubed.auber.ui.Difficulties;
 import com.threecubed.auber.ui.GameUi;
 import com.threecubed.auber.screens.MenuScreen;
 
@@ -46,6 +47,23 @@ public class GameScreen extends ScreenAdapter {
     ui = new GameUi(game);
 
     world = new World(game, demoMode);
+
+    for (int i = 0; i < World.MAX_INFILTRATORS_IN_GAME; i++) {
+      world.queueEntityAdd(new Infiltrator(world));
+      world.infiltratorsAddedCount++;
+    }
+    for (int i = 0; i < World.NPC_COUNT; i++) {
+      world.queueEntityAdd(new Civilian(world));
+    }
+
+    stars = game.atlas.createSprite("stars");
+  }
+
+  public GameScreen(AuberGame game, Difficulties diff) {
+    this.game = game;
+    ui = new GameUi(game);
+
+    world = new World(game, diff);
 
     for (int i = 0; i < World.MAX_INFILTRATORS_IN_GAME; i++) {
       world.queueEntityAdd(new Infiltrator(world));

@@ -19,7 +19,7 @@ public class PowerUp extends GameEntity {
     private World world;
 
     private float time = 0f;
-    private float countdown = 10f;
+    private float countdown;
 
     /**
      * Initialises a power up
@@ -34,6 +34,7 @@ public class PowerUp extends GameEntity {
         this.ability = ability;
         this.world = world;
         position = new Vector2(x, y);
+        this.countdown = world.AUBER_BUFF_TIME;
     }
 
     /**

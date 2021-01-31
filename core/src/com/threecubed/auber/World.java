@@ -18,6 +18,7 @@ import com.threecubed.auber.pathfinding.NavigationMesh;
 import com.threecubed.auber.screens.GameOverScreen;
 import com.threecubed.auber.screens.GameScreen;
 import com.threecubed.auber.Abilities;
+import com.threecubed.auber.ui.Difficulties;
 
 import java.util.*;
 
@@ -82,6 +83,8 @@ public class World {
   public static final float AUBER_RAY_TIME = 0.25f;
   /** The time a debuff should last for (with the exception of blindness). */
   public static final float AUBER_DEBUFF_TIME = 5f;
+  /** The time a buff should last for. */
+  public float AUBER_BUFF_TIME = 10f;
   /** The rate at which auber should heal. */
   public static final float AUBER_HEAL_RATE = 0.005f;
   public static final Color rayColorA = new Color(0.106f, 0.71f, 0.714f, 1f);
@@ -156,7 +159,7 @@ public class World {
   /** The amount of time it takes for an infiltrator to sabotage a system. */
   public static final float SYSTEM_BREAK_TIME = 5f;
   /** The chance an infiltrator will sabotage after pathfinding to a system. */
-  public static final float SYSTEM_SABOTAGE_CHANCE = 0.6f;
+  public static float SYSTEM_SABOTAGE_CHANCE = 0.6f;
   /** The distance the infiltrator can see. Default: 5 tiles */
   public static final float INFILTRATOR_SIGHT_RANGE = 80f;
   /** The speed at which infiltrator projectiles should travel. */
@@ -165,7 +168,7 @@ public class World {
   // TODO: Reset this to 8 once testing is complete
   public static final int MAX_INFILTRATORS = 3;
   /** The interval at which the infiltrator should attack the player when exposed. */
-  public static final float INFILTRATOR_FIRING_INTERVAL = 5f;
+  public static float INFILTRATOR_FIRING_INTERVAL = 5f;
   /** The damage a projectile should do. */
   public static final float INFILTRATOR_PROJECTILE_DAMAGE = 0.2f;
   /**
@@ -195,7 +198,70 @@ public class World {
   }
 
   /**
-   * Initialise the game world.
+   * Initialise the game world with a given difficulty.
+   *
+   * @param game The game object.
+   * @param diff The difficulty of the game {@link Difficulties}.
+   * */
+  public World(AuberGame game, Difficulties diff) {
+    this.game = game;
+    atlas = game.atlas;
+
+    // Configure the camera
+    camera.setToOrtho(false, 480, 270);
+    camera.update();
+
+    Player player = new Player(64f, 64f, this);
+    queueEntityAdd(player);
+    this.player = player;
+
+    if (diff == Difficulties.Hard) {
+      // Game in hard mode
+      // Less buffs are dropped for auber
+      BUFFS_ON_ATTACK = 2;
+      // Buffs last less time
+      AUBER_BUFF_TIME = 6f;
+      // Infiltrators attack more often
+      INFILTRATOR_FIRING_INTERVAL = 3f;
+      // Infiltrators attempt to sabotage more
+      SYSTEM_SABOTAGE_CHANCE = 0.8f;
+    }
+
+    MapObjects objects = map.getLayers().get("object_layer").getObjects();
+    for (MapObject object : objects) {
+      if (object instanceof RectangleMapObject) {
+        RectangleMapObject rectangularObject = (RectangleMapObject) object;
+        switch (rectangularObject.getProperties().get("type", String.class)) {
+          case "system":
+            systems.add(rectangularObject);
+            break;
+          case "medbay":
+            medbay = rectangularObject;
+            break;
+          default:
+            break;
+        }
+      }
+    }
+
+    TiledMapTileLayer navigationLayer = (TiledMapTileLayer) map.getLayers().get("navigation_layer");
+    for (int y = 0; y < navigationLayer.getHeight(); y++) {
+      for (int x = 0; x < navigationLayer.getWidth(); x++) {
+        Cell currentCell = navigationLayer.getCell(x, y);
+        float[] cellCoordinates = {x * navigationLayer.getTileWidth(),
+                                   y * navigationLayer.getTileHeight()};
+        if (currentCell != null) {
+          spawnLocations.add(cellCoordinates);
+          if (currentCell.getTile().getId() == Tiles.FLEE_POINT.tileId) {
+            fleePoints.add(cellCoordinates);
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Initialise the game world with an easy difficulty (default).
    *
    * @param game The game object.
    * */
@@ -233,7 +299,7 @@ public class World {
       for (int x = 0; x < navigationLayer.getWidth(); x++) {
         Cell currentCell = navigationLayer.getCell(x, y);
         float[] cellCoordinates = {x * navigationLayer.getTileWidth(),
-                                   y * navigationLayer.getTileHeight()};
+                y * navigationLayer.getTileHeight()};
         if (currentCell != null) {
           spawnLocations.add(cellCoordinates);
           if (currentCell.getTile().getId() == Tiles.FLEE_POINT.tileId) {

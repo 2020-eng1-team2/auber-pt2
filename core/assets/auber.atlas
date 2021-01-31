@@ -6,14 +6,42 @@ filter: Nearest,Nearest
 repeat: none
 InstaBeam
   rotate: false
+  xy: 1822, 118
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+Invincibility
+  rotate: false
+  xy: 1886, 949
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+Invisibility
+  rotate: false
+  xy: 1958, 2031
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+SuperSpeed
+  rotate: false
   xy: 1924, 2013
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+Vision
+  rotate: false
+  xy: 806, 72
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 alienA
   rotate: false
-  xy: 1886, 949
+  xy: 822, 88
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -27,7 +55,7 @@ alienB
   index: -1
 alienC
   rotate: false
-  xy: 1838, 118
+  xy: 1924, 1997
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -95,20 +123,6 @@ instructions
   orig: 862, 859
   offset: 0, 0
   index: -1
-invincibility
-  rotate: false
-  xy: 806, 88
-  size: 14, 14
-  orig: 14, 14
-  offset: 0, 0
-  index: -1
-invisibility
-  rotate: false
-  xy: 1822, 102
-  size: 14, 14
-  orig: 14, 14
-  offset: 0, 0
-  index: -1
 minimapTexture
   rotate: false
   xy: 1670, 134
@@ -118,14 +132,14 @@ minimapTexture
   index: -1
 mm_indicator
   rotate: false
-  xy: 822, 88
+  xy: 1822, 102
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 mm_system_indicator
   rotate: false
-  xy: 1924, 1997
+  xy: 1838, 118
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -153,7 +167,7 @@ playButtonPressed
   index: -1
 player
   rotate: false
-  xy: 1822, 118
+  xy: 806, 88
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -170,19 +184,5 @@ stars
   xy: 2, 965
   size: 1920, 1080
   orig: 1920, 1080
-  offset: 0, 0
-  index: -1
-superspeed
-  rotate: false
-  xy: 806, 72
-  size: 14, 14
-  orig: 14, 14
-  offset: 0, 0
-  index: -1
-vision
-  rotate: false
-  xy: 1958, 2031
-  size: 14, 14
-  orig: 14, 14
   offset: 0, 0
   index: -1

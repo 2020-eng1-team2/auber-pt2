@@ -53,7 +53,7 @@ public class MenuUI {
     Runnable onPlayClick = new Runnable() {
       @Override
       public void run() {
-        game.setScreen(new GameScreen(game, false));
+        game.setScreen(new GameScreen(game, difficulty));
       }
     };
 
