@@ -30,6 +30,7 @@ public class MenuUI {
   Button playButton;
   Button easyDiffButton;
   Button hardDiffButton;
+  Button loadButton;
   OrthogonalTiledMapRenderer renderer;
   Sprite instructions;
   Sprite title;
@@ -70,12 +71,25 @@ public class MenuUI {
     };
 
     easyDiffButton = new Button(
-        new Vector2(0f, Gdx.graphics.getHeight() / 4 - 150f),
+        new Vector2(0f, Gdx.graphics.getHeight() / 4 - 250f),
         1f, game.atlas.createSprite("easyButton"), game.atlas.createSprite("easyButtonPressed"), game, onDiffClick);
 
     hardDiffButton = new Button(
-            new Vector2(0f, Gdx.graphics.getHeight() / 4 - 150f),
+            new Vector2(0f, Gdx.graphics.getHeight() / 4 - 250f),
             1f, game.atlas.createSprite("hardButton"), game.atlas.createSprite("hardButtonPressed"), game, onDiffClick);
+
+    Runnable onLoadClick = new Runnable() {
+      @Override
+      public void run() {
+        // Load game
+        // Dummy button currently
+        Gdx.app.log("Load", "LOAD GAME");
+      }
+    };
+
+    loadButton = new Button(
+            new Vector2(0f, Gdx.graphics.getHeight() / 4 - 125f),
+            1f, game.atlas.createSprite("loadButton"), game.atlas.createSprite("loadButtonPressed"), game, onLoadClick);
   }
 
   public void render(World world, SpriteBatch spriteBatch) {
@@ -87,6 +101,7 @@ public class MenuUI {
     title.draw(spriteBatch);
 
     playButton.render(spriteBatch);
+    loadButton.render(spriteBatch);
     if (difficulty == Difficulties.Easy) {
       easyDiffButton.render(spriteBatch);
     }
