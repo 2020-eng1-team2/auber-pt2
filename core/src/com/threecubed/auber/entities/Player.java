@@ -59,7 +59,7 @@ public class Player extends GameEntity {
   /** This is used once when {@link #vision} is activated to set all infiltrators to vulnerable */
   public boolean oneTimeVision = false;
 
-  private ShapeRenderer rayRenderer = new ShapeRenderer();
+  private transient ShapeRenderer rayRenderer = new ShapeRenderer();
 
   public Player(float x, float y, World world) {
     super(x, y, world.atlas.createSprite("player"));

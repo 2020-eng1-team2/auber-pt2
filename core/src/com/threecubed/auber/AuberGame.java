@@ -6,17 +6,15 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.threecubed.auber.screens.MenuScreen;
 
 public class AuberGame extends Game {
-  public TextureAtlas atlas;
-
   @Override
   public void create() {
-    atlas = new TextureAtlas("auber.atlas");
-    Gdx.graphics.setWindowedMode(1980, 1080);
+    World.atlas = new TextureAtlas("auber.atlas");
+    Gdx.graphics.setWindowedMode(1280, 720);
     setScreen(new MenuScreen(this));
   }
 
   @Override
   public void dispose() {
-    atlas.dispose();
+    World.atlas.dispose();
   }
 }

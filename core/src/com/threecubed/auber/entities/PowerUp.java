@@ -11,12 +11,12 @@ import com.threecubed.auber.World;
  * */
 public class PowerUp extends GameEntity {
 
-    private Abilities ability;
+    private final Abilities ability;
 
     private boolean beginTimer = false;
     private boolean pickup = true;
 
-    private World world;
+    public transient World world;
 
     private float time = 0f;
     private float countdown;
@@ -30,11 +30,25 @@ public class PowerUp extends GameEntity {
      * @param ability The ability the power up is to grant
      * */
     public PowerUp(float x, float y, World world, Abilities ability) {
-        super(x, y, world.atlas.createSprite(ability.toString()));
+        super(x, y, World.atlas.createSprite(ability.toString()));
         this.ability = ability;
         this.world = world;
         position = new Vector2(x, y);
         this.countdown = world.AUBER_BUFF_TIME;
+    }
+
+    /**
+     * This constructor is necessary for save-loading to work.
+     * It should NEVER be used directly by a human!
+     */
+    public PowerUp() {
+        // Set a random ability here, then when we've been deserialized we'll replace the sprite
+        super(0f, 0f, World.atlas.createSprite(Abilities.randomAbility().toString()));
+        this.ability = Abilities.randomAbility();
+    }
+
+    public void recreateSprite() {
+        this.sprite = World.atlas.createSprite(this.ability.toString());
     }
 
     /**

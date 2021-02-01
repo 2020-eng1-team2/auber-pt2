@@ -47,7 +47,7 @@ public class GameOverUI {
         // Button sprites are now drawn from the bottom left rather than center
         quitButton = new Button(
                 new Vector2(0f, Gdx.graphics.getHeight() / 4 - 125f),
-                1f, game.atlas.createSprite("quitButton"), game.atlas.createSprite("quitButtonPressed"), game, onQuitClick);
+                1f, World.atlas.createSprite("quitButton"), World.atlas.createSprite("quitButtonPressed"), game, onQuitClick);
 
         Runnable onPlayClick = new Runnable() {
             @Override
@@ -58,7 +58,7 @@ public class GameOverUI {
 
         playButton = new Button(
                 new Vector2(Gdx.graphics.getWidth() - 400f, Gdx.graphics.getHeight() / 4 - 125f),
-                1f, game.atlas.createSprite("playButtonRight"), game.atlas.createSprite("playButtonRightPressed"), game, onPlayClick);
+                1f, World.atlas.createSprite("playButtonRight"), World.atlas.createSprite("playButtonRightPressed"), game, onPlayClick);
 
     }
 

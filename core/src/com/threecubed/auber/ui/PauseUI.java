@@ -33,8 +33,9 @@ public class PauseUI {
      *
      * @param game The game object
      * */
-    public PauseUI(final AuberGame game) {
+    public PauseUI(final AuberGame game, World world) {
         this.game = game;
+        this.world = world;
 
         spriteBatch = new SpriteBatch();
 
@@ -49,7 +50,7 @@ public class PauseUI {
         // Button sprites are now drawn from the bottom left rather than center
         quitButton = new Button(
                 new Vector2(0f, Gdx.graphics.getHeight() / 4 - 125f),
-                1f, game.atlas.createSprite("quitButton"), game.atlas.createSprite("quitButtonPressed"), game, onQuitClick);
+                1f, World.atlas.createSprite("quitButton"), World.atlas.createSprite("quitButtonPressed"), game, onQuitClick);
 
         Runnable onResumeClick = new Runnable() {
             @Override
@@ -60,20 +61,20 @@ public class PauseUI {
 
         resumeButton = new Button(
                 new Vector2(Gdx.graphics.getWidth() - 400f, Gdx.graphics.getHeight() / 4 - 125f),
-                1f, game.atlas.createSprite("resumeButton"), game.atlas.createSprite("resumeButtonPressed"), game, onResumeClick);
+                1f, World.atlas.createSprite("resumeButton"), World.atlas.createSprite("resumeButtonPressed"), game, onResumeClick);
 
         Runnable onSaveClick = new Runnable() {
             @Override
             public void run() {
-                // Save game
-                // Dummy button currently
-                Gdx.app.log("SAVE", "SAVE GAME");
+                world.saveGame();
+                GameScreen.paused = false;
+                game.setScreen(new MenuScreen(game));
             }
         };
 
         saveButton = new Button(
                 new Vector2(Gdx.graphics.getWidth() / 2 - 200f, Gdx.graphics.getHeight() / 4 - 125f),
-                1f, game.atlas.createSprite("saveButton"), game.atlas.createSprite("saveButtonPressed"), game, onSaveClick);
+                1f, World.atlas.createSprite("saveButton"), World.atlas.createSprite("saveButtonPressed"), game, onSaveClick);
     }
 
     public void render(World world, SpriteBatch spriteBatch) {

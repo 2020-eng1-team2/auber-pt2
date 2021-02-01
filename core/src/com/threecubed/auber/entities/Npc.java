@@ -26,11 +26,11 @@ import java.util.Random;
 public abstract class Npc extends GameEntity {
   private ArrayList<Vector2> currentPath = new ArrayList<>();
   private Vector2 targetDirection = new Vector2();
-  private NavigationMesh navigationMesh;
+  private final transient NavigationMesh navigationMesh;
 
   protected float maxSpeed = 0.8f;
 
-  private static String[] textureNames = {"alienA", "alienB", "alienC"};
+  private static final transient String[] textureNames = {"alienA", "alienB", "alienC"};
 
   protected States state = States.IDLE;
 
@@ -43,7 +43,7 @@ public abstract class Npc extends GameEntity {
   }
 
   public boolean aiEnabled = true;
-  protected Timer npcTimer = new Timer();
+  protected transient Timer npcTimer = new Timer();
 
   /**
    * Initialise an NPC with a given texture.
@@ -66,14 +66,13 @@ public abstract class Npc extends GameEntity {
    *
    * @param x The x coordinate to initialise the NPC at
    * @param y The y coordinate to initialise the NPC at
-   * @param world The game world
    * */
-  public Npc(float x, float y, World world) {
+  public Npc(float x, float y) {
     this(x, y,
-        world.atlas.createSprite(
-          textureNames[Utils.randomIntInRange(world.randomNumberGenerator, 0,
+        World.atlas.createSprite(
+          textureNames[Utils.randomIntInRange(World.randomNumberGenerator, 0,
             textureNames.length - 1)]),
-        world.navigationMesh);
+        World.navigationMesh);
   }
 
   /**
@@ -82,8 +81,12 @@ public abstract class Npc extends GameEntity {
    * @param world The game world
    * */
   public Npc(World world) {
-    this(0f, 0f, world);
+    this(0f, 0f);
     moveToRandomLocation(world);
+  }
+
+  public Npc() {
+    this(0f, 0f);
   }
 
   /**
