@@ -90,6 +90,22 @@ public class GameScreen extends ScreenAdapter {
     stars = World.atlas.createSprite("stars");
   }
 
+  /**
+   * Initialise the game screen with the {@link AuberGame} object. For use with save files only.
+   *
+   * @param game The game object
+   * @param diff Difficulty of the game
+   * @param fromSave Is game loading from a save file
+   * */
+  public GameScreen(AuberGame game, Difficulties diff, Boolean fromSave) {
+    this.game = game;
+    ui = new GameUi(game);
+    world = new World(game, diff);
+    pauseUi = new PauseUI(game, world);
+
+    stars = World.atlas.createSprite("stars");
+  }
+
   @Override
   public void render(float delta) {
     if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {

@@ -105,7 +105,7 @@ public class MenuUI {
         if (saveFile.exists()) {
           Json json = new Json();
           JsonValue data = new JsonReader().parse(saveFile);
-          GameScreen gs = new GameScreen(game, MenuScreen.difficulty);
+          GameScreen gs = new GameScreen(game, MenuScreen.difficulty, true);
           gs.world.read(json, data);
           game.setScreen(gs);
         } else {
