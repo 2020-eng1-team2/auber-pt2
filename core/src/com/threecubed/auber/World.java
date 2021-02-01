@@ -222,7 +222,7 @@ public class World implements Json.Serializable {
     json.writeValue("buffsOnAttack", this.BUFFS_ON_ATTACK);
     json.writeValue("auberBuffTime", this.AUBER_BUFF_TIME);
     json.writeValue("infiltratorFiringInterval", this.INFILTRATOR_FIRING_INTERVAL);
-    json.writeValue("systemSabotageChange", this.SYSTEM_SABOTAGE_CHANCE);
+    json.writeValue("systemSabotageChance", this.SYSTEM_SABOTAGE_CHANCE);
     json.writeValue("systems", systems);
   }
 
@@ -240,9 +240,8 @@ public class World implements Json.Serializable {
     this.entities = json.readValue("entities", List.class, jsonData);
     this.BUFFS_ON_ATTACK = json.readValue("buffsOnAttack", Integer.class, jsonData);
     this.AUBER_BUFF_TIME = json.readValue("auberBuffTime", Float.class, jsonData);
-    // TODO: we need to make these non-static before we can read them
-//    INFILTRATOR_FIRING_INTERVAL = json.readValue("infiltratorFiringInterval", Float.class, jsonData);
-//    SYSTEM_SABOTAGE_CHANCE = json.readValue("systemSabotageChance", Float.class, jsonData);
+    this.INFILTRATOR_FIRING_INTERVAL = json.readValue("infiltratorFiringInterval", Float.class, jsonData);
+    this.SYSTEM_SABOTAGE_CHANCE = json.readValue("systemSabotageChance", Float.class, jsonData);
     this.systems = json.readValue("systems", ArrayList.class, jsonData);
     for (GameEntity e : entities) {
       if (e instanceof PowerUp) {
