@@ -37,6 +37,8 @@ public class MenuUI {
   Button easyDiffButton;
   Button hardDiffButton;
   Button loadButton;
+  /** Displayed when save file does not exist*/
+  Button loadButtonError;
   Button nextButton;
   Button lastButton;
   Button startButton;
@@ -45,6 +47,8 @@ public class MenuUI {
   Sprite instructions_second;
   Sprite title;
   SpriteBatch spriteBatch;
+
+  FileHandle saveFile = Gdx.files.external(".auber/save.json");
 
   // Main menu screen counter (main, guide 1, guide 2)
   int subScreen = 0;
@@ -97,8 +101,6 @@ public class MenuUI {
             new Vector2(0f, Gdx.graphics.getHeight() / 4 - 250f),
             1f, World.atlas.createSprite("hardButton"), World.atlas.createSprite("hardButtonPressed"), game, onDiffClick);
 
-    FileHandle saveFile = Gdx.files.external(".auber/save.json");
-
     Runnable onLoadClick = new Runnable() {
       @Override
       public void run() {
@@ -117,6 +119,10 @@ public class MenuUI {
     loadButton = new Button(
             new Vector2(0f, Gdx.graphics.getHeight() / 4 - 125f),
             1f, World.atlas.createSprite("loadButton"), World.atlas.createSprite("loadButtonPressed"), game, onLoadClick);
+
+    loadButtonError = new Button(
+            new Vector2(0f, Gdx.graphics.getHeight() / 4 - 125f),
+            1f, World.atlas.createSprite("loadButtonPressed"), World.atlas.createSprite("loadButtonPressed"), game, onLoadClick);
 
     Runnable onNextClick = new Runnable() {
       @Override
@@ -156,7 +162,12 @@ public class MenuUI {
       title.draw(spriteBatch);
 
       playButton.render(spriteBatch);
-      loadButton.render(spriteBatch);
+      if (saveFile.exists()) {
+        loadButton.render(spriteBatch);
+      }
+      else {
+        loadButtonError.render(spriteBatch);
+      }
       if (MenuScreen.difficulty == Difficulties.Easy) {
         easyDiffButton.render(spriteBatch);
       } else {
