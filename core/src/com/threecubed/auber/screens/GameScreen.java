@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonWriter;
 import com.threecubed.auber.AuberGame;
 import com.threecubed.auber.World;
 import com.threecubed.auber.entities.Civilian;
@@ -48,9 +50,10 @@ public class GameScreen extends ScreenAdapter {
   public GameScreen(AuberGame game, boolean demoMode) {
     this.game = game;
     ui = new GameUi(game);
-    pauseUi = new PauseUI(game);
-
     world = new World(game, demoMode);
+
+    pauseUi = new PauseUI(game, world);
+
 
     for (int i = 0; i < World.MAX_INFILTRATORS_IN_GAME; i++) {
       world.queueEntityAdd(new Infiltrator(world));
@@ -60,7 +63,7 @@ public class GameScreen extends ScreenAdapter {
       world.queueEntityAdd(new Civilian(world));
     }
 
-    stars = game.atlas.createSprite("stars");
+    stars = World.atlas.createSprite("stars");
   }
 
   /**
@@ -72,9 +75,9 @@ public class GameScreen extends ScreenAdapter {
   public GameScreen(AuberGame game, Difficulties diff) {
     this.game = game;
     ui = new GameUi(game);
-    pauseUi = new PauseUI(game);
-
     world = new World(game, diff);
+    pauseUi = new PauseUI(game, world);
+
 
     for (int i = 0; i < World.MAX_INFILTRATORS_IN_GAME; i++) {
       world.queueEntityAdd(new Infiltrator(world));
@@ -84,7 +87,23 @@ public class GameScreen extends ScreenAdapter {
       world.queueEntityAdd(new Civilian(world));
     }
 
-    stars = game.atlas.createSprite("stars");
+    stars = World.atlas.createSprite("stars");
+  }
+
+  /**
+   * Initialise the game screen with the {@link AuberGame} object. For use with save files only.
+   *
+   * @param game The game object
+   * @param diff Difficulty of the game
+   * @param fromSave Is game loading from a save file
+   * */
+  public GameScreen(AuberGame game, Difficulties diff, Boolean fromSave) {
+    this.game = game;
+    ui = new GameUi(game);
+    world = new World(game, diff);
+    pauseUi = new PauseUI(game, world);
+
+    stars = World.atlas.createSprite("stars");
   }
 
   @Override

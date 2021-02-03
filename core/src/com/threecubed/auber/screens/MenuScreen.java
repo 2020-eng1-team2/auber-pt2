@@ -55,7 +55,7 @@ public class MenuScreen extends ScreenAdapter {
       world.queueEntityAdd(new Civilian(world));
     }
 
-    stars = game.atlas.createSprite("stars");
+    stars = World.atlas.createSprite("stars");
   }
 
   @Override

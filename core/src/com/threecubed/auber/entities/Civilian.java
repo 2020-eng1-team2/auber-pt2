@@ -23,13 +23,21 @@ public class Civilian extends Npc {
    * @param world The game world
    * */
   public Civilian(float x, float y, World world) {
-    super(x, y, world);
+    super(x, y);
     navigateToRandomSystem(world);
   }
 
   public Civilian(World world) {
     super(world);
     navigateToRandomSystem(world);
+  }
+
+  /**
+   * This constructor is necessary for save-loading to work.
+   * It should NEVER be used directly by a human!
+   */
+  public Civilian() {
+    super(0f, 0f);
   }
 
   @Override

@@ -28,7 +28,7 @@ import java.util.List;
  * @since 1.0
  * */
 public abstract class GameEntity {
-  public Sprite sprite;
+  public transient Sprite sprite;
 
   public float speed = 0.4f;
   public float maxSpeed = 1.2f;
@@ -38,7 +38,7 @@ public abstract class GameEntity {
   public Vector2 velocity;
   public float rotation = 0f;
 
-  private float[][] collisionOffsets;
+  private final transient float[][] collisionOffsets;
 
   /**
    * Initialise a game entity at a given x and y coordinates.

@@ -47,10 +47,10 @@ public class GameUi {
   private BitmapFont uiFont = new BitmapFont();
 
   public GameUi(AuberGame game) {
-    arrowSprite = game.atlas.createSprite("arrow2");
-    miniMapSprite = game.atlas.createSprite("minimapTexture");
-    miniMapMarker = game.atlas.createSprite("mm_indicator");
-    miniMapSystemMarker = game.atlas.createSprite("mm_system_indicator");
+    arrowSprite = World.atlas.createSprite("arrow2");
+    miniMapSprite = World.atlas.createSprite("minimapTexture");
+    miniMapMarker = World.atlas.createSprite("mm_indicator");
+    miniMapSystemMarker = World.atlas.createSprite("mm_system_indicator");
     miniMapSprite.scale(MINIMAP_SCALE_FACTOR);
     mapPos = new Vector2(
             Gdx.graphics.getWidth() - miniMapSprite.getWidth() - minimapOffset.x,
