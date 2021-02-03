@@ -39,6 +39,8 @@ allprojects {
 
 project(":desktop") {
     apply plugin: "java-library"
+    apply plugin: 'jacoco'
+    apply plugin: "com.github.kt3k.coveralls"
 
 
     dependencies {
@@ -46,20 +48,8 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
-        
-    }
-}
 
-project(":core") {
-    apply plugin: "java-library"
-    apply plugin: 'jacoco'
-    apply plugin: "com.github.kt3k.coveralls"
-
-
-    dependencies {
-        api "com.badlogicgames.gdx:gdx:$gdxVersion"
-        api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-
+        api "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
         testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     }
@@ -78,5 +68,16 @@ project(":core") {
 
     coveralls {
         jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
+    }
+}
+
+project(":core") {
+    apply plugin: "java-library"
+
+    dependencies {
+        api "com.badlogicgames.gdx:gdx:$gdxVersion"
+        api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+
+        compile "org.mockito:mockito-core:2.+"
     }
 }

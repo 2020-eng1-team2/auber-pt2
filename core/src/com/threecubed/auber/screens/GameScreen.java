@@ -1,5 +1,6 @@
 package com.threecubed.auber.screens;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -35,7 +36,7 @@ public class GameScreen extends ScreenAdapter {
 
   public static boolean paused = false;
 
-  SpriteBatch screenBatch = new SpriteBatch();
+  SpriteBatch screenBatch;
   GameUi ui;
   PauseUI pauseUi;
 
@@ -49,10 +50,15 @@ public class GameScreen extends ScreenAdapter {
    * */
   public GameScreen(AuberGame game, boolean demoMode) {
     this.game = game;
-    ui = new GameUi(game);
-    world = new World(game, demoMode);
 
-    pauseUi = new PauseUI(game, world);
+    if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+       screenBatch = new SpriteBatch();
+      stars = World.atlas.createSprite("stars");
+      ui = new GameUi(game);
+      pauseUi = new PauseUI(game, world);
+    }
+
+    world = new World(game, demoMode);
 
 
     for (int i = 0; i < World.MAX_INFILTRATORS_IN_GAME; i++) {
@@ -62,8 +68,6 @@ public class GameScreen extends ScreenAdapter {
     for (int i = 0; i < World.NPC_COUNT; i++) {
       world.queueEntityAdd(new Civilian(world));
     }
-
-    stars = World.atlas.createSprite("stars");
   }
 
   /**
@@ -74,9 +78,15 @@ public class GameScreen extends ScreenAdapter {
    * */
   public GameScreen(AuberGame game, Difficulties diff) {
     this.game = game;
-    ui = new GameUi(game);
+
+    if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+      screenBatch = new SpriteBatch();
+      stars = World.atlas.createSprite("stars");
+      ui = new GameUi(game);
+      pauseUi = new PauseUI(game, world);
+    }
+
     world = new World(game, diff);
-    pauseUi = new PauseUI(game, world);
 
 
     for (int i = 0; i < World.MAX_INFILTRATORS_IN_GAME; i++) {
@@ -86,8 +96,6 @@ public class GameScreen extends ScreenAdapter {
     for (int i = 0; i < World.NPC_COUNT; i++) {
       world.queueEntityAdd(new Civilian(world));
     }
-
-    stars = World.atlas.createSprite("stars");
   }
 
   /**
@@ -99,11 +107,14 @@ public class GameScreen extends ScreenAdapter {
    * */
   public GameScreen(AuberGame game, Difficulties diff, Boolean fromSave) {
     this.game = game;
-    ui = new GameUi(game);
-    world = new World(game, diff);
-    pauseUi = new PauseUI(game, world);
 
-    stars = World.atlas.createSprite("stars");
+    world = new World(game, diff);
+    if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+      screenBatch = new SpriteBatch();
+      stars = World.atlas.createSprite("stars");
+      ui = new GameUi(game);
+      pauseUi = new PauseUI(game, world);
+    }
   }
 
   @Override

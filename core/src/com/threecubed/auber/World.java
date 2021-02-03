@@ -1,5 +1,6 @@
 package com.threecubed.auber;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -59,7 +60,7 @@ public class World implements Json.Serializable {
   public static final TiledMapTileSet tileset = map.getTileSets().getTileSet(0);
   public static TextureAtlas atlas;
 
-  public OrthogonalTiledMapRenderer renderer = new OrthogonalTiledMapRenderer(map);
+  public OrthogonalTiledMapRenderer renderer;
 
   public ArrayList<RectangleMapObject> systems = new ArrayList<>();
   public RectangleMapObject medbay;
@@ -260,11 +261,15 @@ public class World implements Json.Serializable {
   public World(AuberGame game, Difficulties diff) {
     this.game = game;
 
+    if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+      this.renderer = new OrthogonalTiledMapRenderer(map);
+    }
+
     // Configure the camera
     camera.setToOrtho(false, 480, 270);
     camera.update();
 
-    Player player = new Player(64f, 64f, this);
+    Player player = new Player(64f, 64f);
     queueEntityAdd(player);
     this.player = player;
 

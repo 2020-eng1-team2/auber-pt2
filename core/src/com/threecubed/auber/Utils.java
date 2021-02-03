@@ -2,8 +2,11 @@ package com.threecubed.auber;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import org.mockito.Mockito;
+
 import java.util.List;
 import java.util.Random;
 
@@ -57,5 +60,14 @@ public final class Utils {
 
   public static <T> T randomListItem(Random randomNumberGenerator, List<T> list) {
     return list.get(randomIntInRange(randomNumberGenerator, 0, list.size()));
+  }
+
+  public static Sprite createMockSprite(float width, float height) {
+    Sprite result = Mockito.mock(Sprite.class);
+
+    Mockito.when(result.getWidth()).thenReturn(width);
+    Mockito.when(result.getHeight()).thenReturn(height);
+
+    return result;
   }
 }

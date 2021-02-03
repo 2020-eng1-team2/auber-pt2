@@ -1,8 +1,10 @@
 package com.threecubed.auber.entities;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.threecubed.auber.Abilities;
+import com.threecubed.auber.Utils;
 import com.threecubed.auber.World;
 
 /**
@@ -43,7 +45,13 @@ public class PowerUp extends GameEntity {
      */
     public PowerUp() {
         // Set a random ability here, then when we've been deserialized we'll replace the sprite
-        super(0f, 0f, World.atlas.createSprite(Abilities.randomAbility().toString()));
+        super(
+                0f,
+                0f,
+                Gdx.app.getType() == Application.ApplicationType.HeadlessDesktop
+                        ? Utils.createMockSprite(14, 14)
+                        : World.atlas.createSprite(Abilities.randomAbility().toString())
+        );
         this.ability = Abilities.randomAbility();
     }
 

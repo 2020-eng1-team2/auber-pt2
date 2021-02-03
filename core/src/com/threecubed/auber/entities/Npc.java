@@ -1,5 +1,7 @@
 package com.threecubed.auber.entities;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Circle;
@@ -69,10 +71,18 @@ public abstract class Npc extends GameEntity {
    * */
   public Npc(float x, float y) {
     this(x, y,
-        World.atlas.createSprite(
-          textureNames[Utils.randomIntInRange(World.randomNumberGenerator, 0,
-            textureNames.length - 1)]),
-        World.navigationMesh);
+            Gdx.app.getType() == Application.ApplicationType.HeadlessDesktop
+                    ? Utils.createMockSprite(14, 14)
+                    : World.atlas.createSprite(
+                        textureNames[
+                                Utils.randomIntInRange(
+                                        World.randomNumberGenerator,
+                                        0,
+                                        textureNames.length - 1
+                                )
+                        ]),
+        World.navigationMesh
+    );
   }
 
   /**

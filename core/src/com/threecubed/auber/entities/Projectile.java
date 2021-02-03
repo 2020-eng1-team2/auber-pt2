@@ -1,9 +1,12 @@
 package com.threecubed.auber.entities;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.threecubed.auber.Utils;
 import com.threecubed.auber.World;
 
 
@@ -34,7 +37,13 @@ public class Projectile extends GameEntity {
    * */
   public Projectile(float x, float y, Vector2 velocity, GameEntity originEntity,
       CollisionActions action, World world) {
-    super(x, y, world.atlas.createSprite("projectile"));
+    super(
+            x,
+            y,
+            Gdx.app.getType() == Application.ApplicationType.HeadlessDesktop
+                    ? Utils.createMockSprite(8, 8)
+                    : World.atlas.createSprite("projectile")
+    );
     collisionAction = action;
     this.originEntity = originEntity;
     this.velocity = velocity;
