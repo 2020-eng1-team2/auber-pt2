@@ -339,6 +339,9 @@ public class World implements Json.Serializable {
     }
   }
 
+  /**
+   * Saves the state of the game to a file - ".auber/save.json" in the user's home directory.
+   */
   public void saveGame() {
     Json json = new Json();
     json.setOutputType(JsonWriter.OutputType.json);
