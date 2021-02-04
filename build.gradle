@@ -71,5 +71,5 @@ project(":core") {
 apply plugin: 'com.palantir.jacoco-full-report'
 apply plugin: "com.github.kt3k.coveralls"
 coveralls {
-    jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
+    jacocoReportPath 'build/reports/jacoco/jacocoFullReport/jacocoFullReport.xml'
 }
