@@ -1,5 +1,6 @@
 package com.threecubed.auber.entities;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
@@ -59,10 +60,19 @@ public class Player extends GameEntity {
   /** This is used once when {@link #vision} is activated to set all infiltrators to vulnerable */
   public boolean oneTimeVision = false;
 
-  private transient ShapeRenderer rayRenderer = new ShapeRenderer();
+  private transient ShapeRenderer rayRenderer;
 
-  public Player(float x, float y, World world) {
-    super(x, y, world.atlas.createSprite("player"));
+  public Player(float x, float y) {
+    super(
+            x,
+            y,
+            Gdx.app.getType() == Application.ApplicationType.HeadlessDesktop
+                    ? Utils.createMockSprite(14, 14)
+                    : World.atlas.createSprite("player")
+    );
+    if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+       rayRenderer = new ShapeRenderer();
+    }
   }
 
   /**

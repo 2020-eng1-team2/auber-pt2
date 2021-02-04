@@ -1,6 +1,8 @@
 sourceCompatibility = 1.8
 sourceSets.main.java.srcDirs = [ "src/" ]
+sourceSets.test.java.srcDirs = ["test/"]
 sourceSets.main.resources.srcDirs = ["../core/assets"]
+sourceSets.test.java.srcDirs = [ "test/" ]
 
 project.ext.mainClassName = "com.threecubed.auber.desktop.DesktopLauncher"
 project.ext.assetsDir = new File("../core/assets")

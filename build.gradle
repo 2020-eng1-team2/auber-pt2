@@ -11,6 +11,7 @@ buildscript {
         classpath 'org.wisepersist:gwt-gradle-plugin:1.0.13'
         classpath 'org.gretty:gretty:3.0.2'
         classpath 'gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.10.2'
+        classpath 'com.palantir:jacoco-coverage:0.4.0'
     }
 }
 
@@ -39,6 +40,7 @@ allprojects {
 
 project(":desktop") {
     apply plugin: "java-library"
+    apply plugin: 'jacoco'
 
 
     dependencies {
@@ -46,37 +48,28 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
-        
+
+        api "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+
+        testImplementation 'junit:junit:4.+'
+        testCompile "org.mockito:mockito-core:2.+"
     }
 }
 
 project(":core") {
     apply plugin: "java-library"
     apply plugin: 'jacoco'
-    apply plugin: "com.github.kt3k.coveralls"
-
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
 
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-        testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+        compile "org.mockito:mockito-core:2.+"
     }
+}
 
-    test {
-        useJUnitPlatform()
-    }
-
-    jacocoTestReport {
-        reports {
-            xml.enabled true
-            csv.enabled false
-            html.enabled true
-        }
-    }
-
-    coveralls {
-        jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
-    }
+apply plugin: 'com.palantir.jacoco-full-report'
+apply plugin: "com.github.kt3k.coveralls"
+coveralls {
+    jacocoReportPath 'build/reports/jacoco/jacocoFullReport/jacocoFullReport.xml'
 }

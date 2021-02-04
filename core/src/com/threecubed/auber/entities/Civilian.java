@@ -43,7 +43,7 @@ public class Civilian extends Npc {
   @Override
   public void handleDestinationReached(final World world) {
     state = States.IDLE;
-    idleForGivenTime(world, Utils.randomFloatInRange(world.randomNumberGenerator, 5f, 10f));
+    idleForGivenTime(world, Utils.randomFloatInRange(World.randomNumberGenerator, 5f, 10f));
   }
 
   @Override

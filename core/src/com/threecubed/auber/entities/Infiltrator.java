@@ -1,5 +1,6 @@
 package com.threecubed.auber.entities;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -33,7 +34,9 @@ public class Infiltrator extends Npc {
   public Infiltrator(World world) {
     super(world);
     navigateToRandomSystem(world);
-    unexposedSprite = new Sprite(sprite);
+    if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+      unexposedSprite = new Sprite(sprite);
+    }
   }
 
   /**
@@ -42,7 +45,9 @@ public class Infiltrator extends Npc {
    */
   public Infiltrator() {
     super();
-    unexposedSprite = new Sprite(sprite);
+    if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+      unexposedSprite = new Sprite(sprite);
+    }
   }
 
   @Override
