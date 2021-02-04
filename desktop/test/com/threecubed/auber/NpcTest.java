@@ -26,4 +26,11 @@ public class NpcTest {
         n.update(world);
         Assert.assertNotEquals(n.position, oldPos);
     }
+
+    @Test
+    public void destinationReachedTest() {
+        Civilian n = new Civilian(world);
+        n.handleDestinationReached(world);
+        Assert.assertEquals(n.getState(), Npc.States.IDLE);
+    }
 }
