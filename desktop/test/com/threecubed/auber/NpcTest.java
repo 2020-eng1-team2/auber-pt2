@@ -1,24 +1,29 @@
 package com.threecubed.auber;
 
+import com.badlogic.gdx.math.Vector2;
 import com.threecubed.auber.entities.Civilian;
-import com.threecubed.auber.screens.GameScreen;
-import com.threecubed.auber.ui.Difficulties;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.threecubed.auber.entities.Npc;
+import de.tomgrill.gdxtesting.GdxTestRunner;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class NpcTest extends GameTest {
-    private Civilian npc;
-    private GameScreen screen;
+@RunWith(GdxTestRunner.class)
+public class NpcTest {
 
-    @BeforeEach
-    void beforeEach() {
-        screen = new GameScreen(game, Difficulties.Easy);
-        game.setScreen(screen);
-        System.out.println("NpcTest initialised");
+    private World world;
+
+    @Before
+    public void createWorld() {
+        world = new World(null);
     }
 
     @Test
-    void testSmoke() {
-        npc = new Civilian(0, 0, screen.world);
+    public void updateMovedTest() {
+        Civilian n = new Civilian(world);
+        Vector2 oldPos = n.position.cpy();
+        n.update(world);
+        Assert.assertNotEquals(n.position, oldPos);
     }
 }

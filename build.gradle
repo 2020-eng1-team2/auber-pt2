@@ -50,8 +50,9 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
 
         api "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-        testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+        testImplementation 'junit:junit:4.+'
+        testImplementation "org.mockito:mockito-all:1.9.+"
     }
 
     test {
