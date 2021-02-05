@@ -29,9 +29,9 @@ public class GameUI {
   private static final int MAP_WIDTH_PIXEL_SPACE = 720;
 
   private static final Vector2 HEALTH_WARNINGS_POSITION = new Vector2(350f, 70f);
-  private static final Vector2 BUFFS_POSITION = new Vector2(20f, 1040f);
+  private static Vector2 BUFFS_POSITION = new Vector2(20f, 1040f);
 
-  private static final Vector2 SYSTEM_WARNINGS_POSITION = new Vector2(1750f, 50f);
+  private static Vector2 SYSTEM_WARNINGS_POSITION = new Vector2(1750f, 50f);
 
   private ShapeRenderer shapeRenderer = new ShapeRenderer();
 
@@ -65,6 +65,8 @@ public class GameUI {
    * @param screenBatch The batch to draw the UI to
    * */
   public void render(World world, SpriteBatch screenBatch) {
+    SYSTEM_WARNINGS_POSITION = new Vector2((1750f / 1920f) * Gdx.graphics.getWidth(), 50f);
+    BUFFS_POSITION = new Vector2(20f, (1040f / 1080f) * Gdx.graphics.getHeight());
     if (world.player.blinded) {
       shapeRenderer.begin(ShapeType.Filled);
       shapeRenderer.setColor(blindedColor);
