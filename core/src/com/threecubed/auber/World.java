@@ -178,8 +178,7 @@ public class World implements Json.Serializable {
   /** The speed at which infiltrator projectiles should travel. */
   public static final float INFILTRATOR_PROJECTILE_SPEED = 4f;
   /** Maximum infiltrators in a full game of Auber (including defated ones). */
-  // TODO: Reset this to 8 once testing is complete
-  public static final int MAX_INFILTRATORS = 3;
+  public static final int MAX_INFILTRATORS = 8;
   /** The interval at which the infiltrator should attack the player when exposed. */
   public float INFILTRATOR_FIRING_INTERVAL = 5f;
   /** The damage a projectile should do. */
@@ -188,8 +187,8 @@ public class World implements Json.Serializable {
    * Max infiltrators alive at a given point, Should always be greater or equal to
    * {@link World#MAX_INFILTRATORS}.
    * */
-  // TODO: Reset this back to 3 once testing is done
-  public static final int MAX_INFILTRATORS_IN_GAME = 2;
+  // This was originally set to 3, however based on the advice of the above comment, it has been changed to 8
+  public static final int MAX_INFILTRATORS_IN_GAME = 8;
 
   /** The amount of variance there should be between the speeds of different NPCs. */
   public static final float[] NPC_SPEED_VARIANCE = {0.8f, 1.2f};
