@@ -2,6 +2,7 @@ package com.threecubed.auber.screens;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -29,6 +30,8 @@ public class MenuScreen extends ScreenAdapter {
   public World world;
   public AuberGame game;
   Sprite stars;
+
+  public static boolean begin = false;
 
   SpriteBatch screenBatch;
   MenuUI ui;
@@ -64,6 +67,9 @@ public class MenuScreen extends ScreenAdapter {
 
   @Override
   public void render(float delta) {
+    if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_RIGHT)) {
+      begin = true;
+    }
     // Add any queued entities
     world.updateEntities();
 

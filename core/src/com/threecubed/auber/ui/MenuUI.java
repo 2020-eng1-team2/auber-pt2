@@ -153,6 +153,11 @@ public class MenuUI {
 
   public void render(World world, SpriteBatch spriteBatch) {
 
+    if (MenuScreen.begin) {
+      MenuScreen.begin = false;
+      game.setScreen(new GameScreen(game, MenuScreen.difficulty));
+    }
+
     spriteBatch.begin();
 
     if (subScreen == 0) {
