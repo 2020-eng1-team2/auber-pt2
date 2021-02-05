@@ -16,7 +16,7 @@ import com.threecubed.auber.AuberGame;
 import com.threecubed.auber.World;
 
 
-public class GameUi {
+public class GameUI {
   private static final int CHARGE_METER_WIDTH = 20;
   private static final int CHARGE_METER_MAX_HEIGHT = 100;
   private static final Vector2 CHARGE_METER_POSITION = new Vector2(50f, 50f);
@@ -46,7 +46,7 @@ public class GameUi {
 
   private BitmapFont uiFont = new BitmapFont();
 
-  public GameUi(AuberGame game) {
+  public GameUI(AuberGame game) {
     arrowSprite = World.atlas.createSprite("arrow2");
     miniMapSprite = World.atlas.createSprite("minimapTexture");
     miniMapMarker = World.atlas.createSprite("mm_indicator");

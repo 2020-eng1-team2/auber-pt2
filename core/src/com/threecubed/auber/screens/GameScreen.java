@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonWriter;
 import com.threecubed.auber.AuberGame;
 import com.threecubed.auber.World;
 import com.threecubed.auber.entities.Civilian;
@@ -18,7 +16,7 @@ import com.threecubed.auber.entities.GameEntity;
 import com.threecubed.auber.entities.Infiltrator;
 import com.threecubed.auber.entities.Player;
 import com.threecubed.auber.ui.Difficulties;
-import com.threecubed.auber.ui.GameUi;
+import com.threecubed.auber.ui.GameUI;
 import com.threecubed.auber.ui.PauseUI;
 
 
@@ -37,7 +35,7 @@ public class GameScreen extends ScreenAdapter {
   public static boolean paused = false;
 
   SpriteBatch screenBatch;
-  GameUi ui;
+  GameUI ui;
   PauseUI pauseUi;
 
   int workingSystems = 0;
@@ -54,7 +52,7 @@ public class GameScreen extends ScreenAdapter {
     if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
        screenBatch = new SpriteBatch();
       stars = World.atlas.createSprite("stars");
-      ui = new GameUi(game);
+      ui = new GameUI(game);
       pauseUi = new PauseUI(game, world);
     }
 
@@ -82,7 +80,7 @@ public class GameScreen extends ScreenAdapter {
     if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
       screenBatch = new SpriteBatch();
       stars = World.atlas.createSprite("stars");
-      ui = new GameUi(game);
+      ui = new GameUI(game);
       pauseUi = new PauseUI(game, world);
     }
 
@@ -112,7 +110,7 @@ public class GameScreen extends ScreenAdapter {
     if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
       screenBatch = new SpriteBatch();
       stars = World.atlas.createSprite("stars");
-      ui = new GameUi(game);
+      ui = new GameUI(game);
       pauseUi = new PauseUI(game, world);
     }
   }
