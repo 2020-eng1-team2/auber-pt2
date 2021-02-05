@@ -158,7 +158,7 @@ public class MenuUI {
     if (subScreen == 0) {
       // draw menu
       title.setScale(0.5f);
-      title.setPosition(-200f, 600f);
+      title.setPosition(-200f, 400f);
       title.draw(spriteBatch);
 
       playButton.render(spriteBatch);
