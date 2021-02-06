@@ -65,8 +65,8 @@ public class GameUI {
    * @param screenBatch The batch to draw the UI to
    * */
   public void render(World world, SpriteBatch screenBatch) {
-    SYSTEM_WARNINGS_POSITION = new Vector2((1750f / 1920f) * Gdx.graphics.getWidth(), 50f);
-    BUFFS_POSITION = new Vector2(20f, (1040f / 1080f) * Gdx.graphics.getHeight());
+    //SYSTEM_WARNINGS_POSITION = new Vector2((1750f / 1920f) * Gdx.graphics.getWidth(), 50f);
+    //BUFFS_POSITION = new Vector2(20f, (1040f / 1080f) * Gdx.graphics.getHeight());
     if (world.player.blinded) {
       shapeRenderer.begin(ShapeType.Filled);
       shapeRenderer.setColor(blindedColor);
