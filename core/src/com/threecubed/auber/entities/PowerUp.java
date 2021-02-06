@@ -32,7 +32,10 @@ public class PowerUp extends GameEntity {
      * @param ability The ability the power up is to grant
      * */
     public PowerUp(float x, float y, World world, Abilities ability) {
-        super(x, y, World.atlas.createSprite(ability.toString()));
+        super(x, y, Gdx.app.getType() == Application.ApplicationType.HeadlessDesktop
+                ? Utils.createMockSprite(14, 14)
+                : World.atlas.createSprite(
+                ability.toString()));
         this.ability = ability;
         this.world = world;
         position = new Vector2(x, y);
