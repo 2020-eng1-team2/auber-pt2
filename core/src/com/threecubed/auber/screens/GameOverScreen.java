@@ -27,7 +27,7 @@ public class GameOverScreen extends ScreenAdapter {
   SpriteBatch batch = new SpriteBatch();
 
   GameOverUI gameOverUi;
-  public boolean userWon;
+  public static boolean userWon;
 
   /**
    * Instantiate the screen with an {@link AuberGame} object.
@@ -56,15 +56,6 @@ public class GameOverScreen extends ScreenAdapter {
 
     // Draw UI
     gameOverUi.render(batch);
-
-    batch.begin();
-    if (userWon) {
-      font.draw(batch, "YOU WON!", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-    }
-    else {
-      font.draw(batch, "YOU LOST!", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-    }
-    batch.end();
   }
   
 }

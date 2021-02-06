@@ -1,11 +1,13 @@
 package com.threecubed.auber.ui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.threecubed.auber.AuberGame;
 import com.threecubed.auber.World;
+import com.threecubed.auber.screens.GameOverScreen;
 import com.threecubed.auber.screens.GameScreen;
 import com.threecubed.auber.screens.MenuScreen;
 
@@ -26,6 +28,9 @@ public class GameOverUI {
     OrthogonalTiledMapRenderer renderer;
     SpriteBatch spriteBatch;
 
+    Sprite winSprite;
+    Sprite loseSprite;
+
     /**
      * Instantiate the screen with the {@link AuberGame} object. Set the buttons up to be
      * rendered.
@@ -36,6 +41,11 @@ public class GameOverUI {
         this.game = game;
 
         spriteBatch = new SpriteBatch();
+
+        winSprite = World.atlas.createSprite("win");
+        winSprite.setPosition((Gdx.graphics.getWidth() / 2f) - (winSprite.getWidth() / 2f), (Gdx.graphics.getHeight() / 2f) - (winSprite.getHeight() / 2f));
+        loseSprite = World.atlas.createSprite("lose");
+        loseSprite.setPosition((Gdx.graphics.getWidth() / 2f) - (loseSprite.getWidth() / 2f), (Gdx.graphics.getHeight() / 2f) - (loseSprite.getHeight() / 2f));
 
         Runnable onQuitClick = new Runnable() {
             @Override
@@ -65,6 +75,15 @@ public class GameOverUI {
     public void render(SpriteBatch spriteBatch) {
 
         spriteBatch.begin();
+
+        if (GameOverScreen.userWon) {
+            //user won
+            winSprite.draw(spriteBatch);
+        }
+        else {
+            // user lost
+            loseSprite.draw(spriteBatch);
+        }
 
         quitButton.render(spriteBatch);
         playButton.render(spriteBatch);

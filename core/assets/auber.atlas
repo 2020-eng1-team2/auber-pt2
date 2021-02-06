@@ -20,7 +20,7 @@ Invincibility
   index: -1
 Invisibility
   rotate: false
-  xy: 2024, 2015
+  xy: 2008, 2015
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -55,7 +55,7 @@ alienB
   index: -1
 alienC
   rotate: false
-  xy: 2008, 2015
+  xy: 1992, 2015
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -83,7 +83,7 @@ auber_logo
   index: -1
 backButton
   rotate: false
-  xy: 1052, 218
+  xy: 1052, 116
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
@@ -91,13 +91,6 @@ backButton
 easyButtonPressed
   rotate: false
   xy: 806, 2
-  size: 400, 100
-  orig: 400, 100
-  offset: 0, 0
-  index: -1
-hardButton
-  rotate: false
-  xy: 1610, 14
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
@@ -132,7 +125,7 @@ mm_indicator
   index: -1
 mm_system_indicator
   rotate: false
-  xy: 1992, 2015
+  xy: 2024, 2015
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -153,7 +146,7 @@ placeholder
   index: -1
 playButton
   rotate: false
-  xy: 1052, 116
+  xy: 1208, 14
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
@@ -167,7 +160,7 @@ playButtonPressed
   index: -1
 playButtonRight
   rotate: false
-  xy: 1610, 218
+  xy: 1454, 116
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
@@ -188,7 +181,7 @@ projectile
   index: -1
 saveButtonPressed
   rotate: false
-  xy: 1454, 116
+  xy: 1610, 14
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
@@ -200,9 +193,16 @@ stars
   orig: 1920, 1080
   offset: 0, 0
   index: -1
+startButton
+  rotate: false
+  xy: 1052, 218
+  size: 400, 100
+  orig: 400, 100
+  offset: 0, 0
+  index: -1
 startButtonPressed
   rotate: false
-  xy: 1208, 14
+  xy: 1610, 218
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
@@ -215,106 +215,120 @@ filter: Nearest,Nearest
 repeat: none
 backButtonPressed
   rotate: false
-  xy: 2, 2
+  xy: 1284, 998
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 easyButton
   rotate: false
-  xy: 2, 104
+  xy: 1284, 1406
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 guide1
   rotate: false
-  xy: 2, 1132
+  xy: 2, 1296
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 guide2
   rotate: false
-  xy: 2, 410
+  xy: 2, 574
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
+hardButton
+  rotate: false
+  xy: 1284, 1916
+  size: 400, 100
+  orig: 400, 100
+  offset: 0, 0
+  index: -1
 hardButtonPressed
   rotate: false
-  xy: 1284, 1548
+  xy: 1284, 1508
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 loadButton
   rotate: false
-  xy: 1284, 1752
+  xy: 2, 2
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 loadButtonPressed
   rotate: false
-  xy: 404, 308
+  xy: 1284, 1610
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
+lose
+  rotate: false
+  xy: 2, 104
+  size: 933, 233
+  orig: 933, 233
+  offset: 0, 0
+  index: -1
 nextButtonPressed
   rotate: false
-  xy: 2, 206
+  xy: 1284, 1712
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 playButtonRightPressed
   rotate: false
-  xy: 404, 206
+  xy: 1284, 1304
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 quitButton
   rotate: false
-  xy: 1284, 1446
+  xy: 1284, 1100
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 quitButtonPressed
   rotate: false
-  xy: 806, 308
+  xy: 1284, 1202
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 resumeButton
   rotate: false
-  xy: 2, 308
+  xy: 1284, 1814
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 resumeButtonPressed
   rotate: false
-  xy: 1284, 1650
+  xy: 404, 2
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 saveButton
   rotate: false
-  xy: 404, 104
+  xy: 1284, 896
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
-startButton
+win
   rotate: false
-  xy: 806, 206
-  size: 400, 100
-  orig: 400, 100
+  xy: 2, 339
+  size: 933, 233
+  orig: 933, 233
   offset: 0, 0
   index: -1
