@@ -239,12 +239,14 @@ public class Player extends GameEntity {
 
       move(velocity, World.map);
 
-      // Detect power ups near the player (within region of player sprite)
-      PowerUp pu = getNearbyPowerUps(world);
-      if (pu != null) {
-        Gdx.app.log("near", pu.getAbility().toString());
-        pu.applyBuff();
-        pu.sprite.setAlpha(0f);
+      if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+        // Detect power ups near the player (within region of player sprite)
+        PowerUp pu = getNearbyPowerUps(world);
+        if (pu != null) {
+          Gdx.app.log("near", pu.getAbility().toString());
+          pu.applyBuff();
+          pu.sprite.setAlpha(0f);
+        }
       }
     }
   }
