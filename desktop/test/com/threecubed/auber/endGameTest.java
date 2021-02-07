@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import static org.mockito.Mockito.mock;
 
 @RunWith(GdxTestRunner.class)
-public class endGameTest {
+public class EndGameTest {
 
     private World world;
     private AuberGame game;
