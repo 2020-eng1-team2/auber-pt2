@@ -184,11 +184,10 @@ public class World implements Json.Serializable {
   /** The damage a projectile should do. */
   public static final float INFILTRATOR_PROJECTILE_DAMAGE = 0.2f;
   /**
-   * Max infiltrators alive at a given point, Should always be greater or equal to
+   * Max infiltrators alive at a given point, Should always be less than
    * {@link World#MAX_INFILTRATORS}.
    * */
-  // This was originally set to 3, however based on the advice of the above comment, it has been changed to 8
-  public static final int MAX_INFILTRATORS_IN_GAME = 8;
+  public static final int MAX_INFILTRATORS_IN_GAME = 3;
 
   /** The amount of variance there should be between the speeds of different NPCs. */
   public static final float[] NPC_SPEED_VARIANCE = {0.8f, 1.2f};
