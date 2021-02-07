@@ -130,21 +130,23 @@ public class Infiltrator extends Npc {
     }
     //Gdx.app.log("system", "attacked");
 
-    final RectangleMapObject system = getNearbyObjects(World.map);
-    if (system != null) {
-      world.updateSystemState(system.getRectangle().getX(), system.getRectangle().getY(),
-          World.SystemStates.ATTACKED);
+    if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+      final RectangleMapObject system = getNearbyObjects(World.map);
+      if (system != null) {
+        world.updateSystemState(system.getRectangle().getX(), system.getRectangle().getY(),
+                World.SystemStates.ATTACKED);
 
-      npcTimer.scheduleTask(new Task() {
-        @Override
-        public void run() {
-          if (aiEnabled) {
-            world.updateSystemState(system.getRectangle().getX(), system.getRectangle().getY(),
-                World.SystemStates.DESTROYED);
-            navigateToRandomSystem(world);
+        npcTimer.scheduleTask(new Task() {
+          @Override
+          public void run() {
+            if (aiEnabled) {
+              world.updateSystemState(system.getRectangle().getX(), system.getRectangle().getY(),
+                      World.SystemStates.DESTROYED);
+              navigateToRandomSystem(world);
+            }
           }
-        }
-      }, World.SYSTEM_BREAK_TIME);
+        }, World.SYSTEM_BREAK_TIME);
+      }
     }
   }
 
@@ -185,5 +187,13 @@ public class Infiltrator extends Npc {
     Projectile projectile = new Projectile(getCenterX(), getCenterY(), projectileVelocity, this,
         Projectile.CollisionActions.randomAction(), world);
     world.queueEntityAdd(projectile);
-  } 
+  }
+
+  /**
+   * Only use for testing, calls private function attackNearbySystem()
+   * @param world
+   */
+  public void virtualAttackSystem(World world) {
+    attackNearbySystem(world);
+  }
 }

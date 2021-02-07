@@ -6,19 +6,25 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.threecubed.auber.entities.GameEntity;
 import com.threecubed.auber.entities.Infiltrator;
 import com.threecubed.auber.entities.PowerUp;
+import com.threecubed.auber.screens.GameScreen;
+import com.threecubed.auber.ui.Difficulties;
 import de.tomgrill.gdxtesting.GdxTestRunner;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.mockito.Mockito.mock;
+
 @RunWith(GdxTestRunner.class)
 public class PowerUpTest {
     private World world;
+    private AuberGame game;
 
     @Before
     public void createWorld() {
-        world = new World(null);
+        game = mock(AuberGame.class);
+        world = new World(game);
     }
 
     @Test
@@ -75,5 +81,67 @@ public class PowerUpTest {
             }
         }
         Assert.assertEquals(0, mistake);
+    }
+
+    @Test
+    public void buffsOnAttackEasyTest() {
+        GameScreen gs = new GameScreen(game, Difficulties.Easy);
+        world = gs.world;
+        world.updateEntities();
+        Infiltrator infiltrator = null;
+        // Attack 1 system
+        for (GameEntity ent : world.getEntities()) {
+            if (ent instanceof Infiltrator) {
+                infiltrator = (Infiltrator) ent;
+                break;
+            }
+        }
+        if (infiltrator == null) {
+            System.out.println("no infiltrators");
+            Assert.assertTrue(false);
+        }
+        else {
+            infiltrator.virtualAttackSystem(world);
+            world.updateEntities();
+            // Scan world for 5 power ups
+            int countDooku = 0;
+            for (GameEntity ent : world.getEntities()) {
+                if (ent instanceof PowerUp) {
+                    countDooku++;
+                }
+            }
+            Assert.assertEquals(5, countDooku);
+        }
+    }
+
+    @Test
+    public void buffsOnAttackHardTest() {
+        GameScreen gs = new GameScreen(game, Difficulties.Hard);
+        world = gs.world;
+        world.updateEntities();
+        Infiltrator infiltrator = null;
+        // Attack 1 system
+        for (GameEntity ent : world.getEntities()) {
+            if (ent instanceof Infiltrator) {
+                infiltrator = (Infiltrator) ent;
+                break;
+            }
+        }
+        if (infiltrator == null) {
+            System.out.println("no infiltrators");
+            Assert.assertTrue(false);
+        }
+        else {
+            infiltrator.virtualAttackSystem(world);
+            world.updateEntities();
+            // Scan world for 5 power ups
+            int countDooku = 0;
+            for (GameEntity ent : world.getEntities()) {
+                if (ent instanceof PowerUp) {
+                    countDooku++;
+                }
+            }
+            Assert.assertEquals(2, countDooku);
+        }
     }
 }
