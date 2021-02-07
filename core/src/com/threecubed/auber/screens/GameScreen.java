@@ -77,15 +77,14 @@ public class GameScreen extends ScreenAdapter {
   public GameScreen(AuberGame game, Difficulties diff) {
     this.game = game;
 
+    world = new World(game, diff);
+
     if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
       screenBatch = new SpriteBatch();
       stars = World.atlas.createSprite("stars");
       ui = new GameUI(game);
       pauseUi = new PauseUI(game, world);
     }
-
-    world = new World(game, diff);
-
 
     for (int i = 0; i < World.MAX_INFILTRATORS_IN_GAME; i++) {
       world.queueEntityAdd(new Infiltrator(world));
