@@ -94,6 +94,9 @@ public class PowerUp extends GameEntity {
                 removeBuff();
             }
         }
+        if (!canPickup()) {
+            this.sprite.setAlpha(0f);
+        }
     }
 
     /**

@@ -182,7 +182,7 @@ public class World implements Json.Serializable {
   /** The interval at which the infiltrator should attack the player when exposed. */
   public float INFILTRATOR_FIRING_INTERVAL = 5f;
   /** The damage a projectile should do. */
-  public static final float INFILTRATOR_PROJECTILE_DAMAGE = 0.2f;
+  public static final float INFILTRATOR_PROJECTILE_DAMAGE = 0.1f;
   /**
    * Max infiltrators alive at a given point, Should always be less than
    * {@link World#MAX_INFILTRATORS}.

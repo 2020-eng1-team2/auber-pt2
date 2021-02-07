@@ -59,4 +59,10 @@ public class InfiltratorTest {
             Assert.assertEquals(infiltrator.speed, world.player.speed, 0);
         }
     }
+
+    @Test
+    public void attackDamageTest() {
+        world.updateEntities();
+        Assert.assertEquals(world.player.health * 0.1f, world.INFILTRATOR_PROJECTILE_DAMAGE, 0);
+    }
 }
