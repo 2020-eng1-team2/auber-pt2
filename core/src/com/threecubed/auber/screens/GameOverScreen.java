@@ -1,5 +1,6 @@
 package com.threecubed.auber.screens;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -24,7 +25,7 @@ public class GameOverScreen extends ScreenAdapter {
   AuberGame game;
 
   BitmapFont font = new BitmapFont();
-  SpriteBatch batch = new SpriteBatch();
+  SpriteBatch batch;
 
   GameOverUI gameOverUi;
   public static boolean userWon;
@@ -37,25 +38,28 @@ public class GameOverScreen extends ScreenAdapter {
    * */
   public GameOverScreen(AuberGame game, boolean userWon) {
     this.game = game;
-    font.getData().setScale(2);
+    if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+      batch = new SpriteBatch();
+      gameOverUi = new GameOverUI(game);
+    }
 
     this.userWon = userWon;
-
-    gameOverUi = new GameOverUI(game);
   }
 
   @Override
   public void render(float deltaTime) {
-    // Set the background color
-    Gdx.gl.glClearColor(0, 0, 0, 1);
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
     if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
       game.setScreen(new MenuScreen(game));
     }
 
-    // Draw UI
-    gameOverUi.render(batch);
+    if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+      // Set the background color
+      Gdx.gl.glClearColor(0, 0, 0, 1);
+      Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+      // Draw UI
+      gameOverUi.render(batch);
+    }
   }
   
 }
