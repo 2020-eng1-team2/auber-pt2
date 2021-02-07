@@ -18,6 +18,8 @@ import com.threecubed.auber.entities.Player;
 import com.threecubed.auber.ui.Difficulties;
 import com.threecubed.auber.ui.MenuUI;
 
+import java.awt.*;
+
 
 /**
  * The main screen of the game, responsible for rendering entities and executing their functions.
@@ -35,6 +37,9 @@ public class MenuScreen extends ScreenAdapter {
 
   SpriteBatch screenBatch;
   MenuUI ui;
+
+  // Used to determine if screen size is 1080p (if so, fullscreen mode is unlocked)
+  Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
   public static Difficulties difficulty = Difficulties.Easy;
 
@@ -69,6 +74,16 @@ public class MenuScreen extends ScreenAdapter {
   public void render(float delta) {
     if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_RIGHT)) {
       begin = true;
+    }
+    if (Gdx.input.isKeyPressed(Input.Keys.F)) {
+      if (dimension.getHeight() == 1080 && dimension.getWidth() == 1920) {
+        Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+      }
+    }
+    if (Gdx.input.isKeyPressed(Input.Keys.G)) {
+      if (dimension.getHeight() == 1080 && dimension.getWidth() == 1920) {
+        Gdx.graphics.setWindowedMode(1920, 1080);
+      }
     }
     // Add any queued entities
     world.updateEntities();
