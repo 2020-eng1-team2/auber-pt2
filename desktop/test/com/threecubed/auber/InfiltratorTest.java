@@ -40,4 +40,23 @@ public class InfiltratorTest {
         }
         Assert.assertEquals(world.MAX_INFILTRATORS_IN_GAME, counter);
     }
+
+    @Test
+    public void playerInfiltratorSpeedTest() {
+        world.updateEntities();
+        Infiltrator infiltrator = null;
+        for (GameEntity ent : world.getEntities()) {
+            if (ent instanceof Infiltrator) {
+                infiltrator = (Infiltrator) ent;
+                break;
+            }
+        }
+        if (infiltrator == null) {
+            // No infiltrators on map :(
+            Assert.assertTrue(false);
+        }
+        else {
+            Assert.assertEquals(infiltrator.speed, world.player.speed, 0);
+        }
+    }
 }
