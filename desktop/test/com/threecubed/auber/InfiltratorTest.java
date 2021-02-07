@@ -13,6 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+
 import static org.mockito.Mockito.mock;
 
 @RunWith(GdxTestRunner.class)
@@ -64,5 +66,29 @@ public class InfiltratorTest {
     public void attackDamageTest() {
         world.updateEntities();
         Assert.assertEquals(world.player.health * 0.1f, world.INFILTRATOR_PROJECTILE_DAMAGE, 0);
+    }
+
+    @Test
+    public void infiltratorSpawnTest() throws ClassNotFoundException {
+        world.updateEntities();
+        ArrayList<Infiltrator> infiltrators = new ArrayList<>();
+        for (GameEntity ent : world.getEntities()) {
+            if (ent instanceof Infiltrator) {
+                infiltrators.add((Infiltrator) ent);
+            }
+        }
+        if (infiltrators.isEmpty()) {
+            // No infiltrators
+            throw new ClassNotFoundException("No Infiltrators on map");
+        }
+        for (Infiltrator infiltrator : infiltrators) {
+            for (Infiltrator infiltrator1 : infiltrators) {
+                if (infiltrator.position == infiltrator1.position && !(infiltrator.equals(infiltrator1))) {
+                    // Two infiltrators have spawned in the same position
+                    Assert.assertTrue(false);
+                }
+            }
+        }
+        Assert.assertTrue(true);
     }
 }
