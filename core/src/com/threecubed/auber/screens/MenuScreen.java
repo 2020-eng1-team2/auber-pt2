@@ -75,12 +75,12 @@ public class MenuScreen extends ScreenAdapter {
     if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_RIGHT)) {
       begin = true;
     }
-    if (Gdx.input.isKeyPressed(Input.Keys.F)) {
+    if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
       if (dimension.getHeight() == 1080 && dimension.getWidth() == 1920) {
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
       }
     }
-    if (Gdx.input.isKeyPressed(Input.Keys.G)) {
+    if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
       if (dimension.getHeight() == 1080 && dimension.getWidth() == 1920) {
         Gdx.graphics.setWindowedMode(1920, 1080);
       }
