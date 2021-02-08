@@ -38,7 +38,7 @@ public class InfiltratorTest {
                 counter++;
             }
         }
-        Assert.assertEquals(world.MAX_INFILTRATORS, counter);
+        Assert.assertEquals(world.MAX_INFILTRATORS_IN_GAME, counter);
     }
 
     @Test
