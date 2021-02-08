@@ -31,6 +31,7 @@ public class InfiltratorTest {
         world = gs.world;
     }
 
+    // Currently fails as setting MAX_INFILTRATORS_IN_GAME to 8 will cause game breaking bug
     @Test
     public void infiltratorsSpawnedTest() {
         int counter = 0;
@@ -40,7 +41,7 @@ public class InfiltratorTest {
                 counter++;
             }
         }
-        Assert.assertEquals(world.MAX_INFILTRATORS_IN_GAME, counter);
+        Assert.assertEquals(world.MAX_INFILTRATORS, counter);
     }
 
     @Test

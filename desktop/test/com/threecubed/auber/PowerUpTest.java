@@ -41,6 +41,7 @@ public class PowerUpTest {
     public void invincibilityTest() {
         // Set player health
         world.player.health = 0.5f;
+        float startHealth = world.player.health;
         PowerUp pu = new PowerUp(0f, 0f, world, Abilities.Invincibility);
         world.queueEntityAdd(pu);
         world.updateEntities();
@@ -48,11 +49,14 @@ public class PowerUpTest {
         pu.applyBuff();
         pu.update(world);
         world.player.update(world);
-        Assert.assertEquals(true, world.player.health == 1f);
+        world.player.health = 0.9f;
+        world.player.update(world);
+        Assert.assertNotEquals(world.player.health, startHealth);
     }
 
     @Test
     public void superSpeedTest() {
+        float startSpeed = world.player.maxSpeed;
         PowerUp pu = new PowerUp(0f, 0f, world, Abilities.SuperSpeed);
         world.queueEntityAdd(pu);
         world.updateEntities();
@@ -60,7 +64,7 @@ public class PowerUpTest {
         pu.applyBuff();
         pu.update(world);
         world.player.update(world);
-        Assert.assertEquals(true, world.player.maxSpeed == 4.8f);
+        Assert.assertNotEquals(world.player.maxSpeed, startSpeed);
     }
 
     @Test
