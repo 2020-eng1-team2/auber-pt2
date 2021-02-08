@@ -12,4 +12,9 @@ public class AssetTest {
     public void assetTest() {
         Assert.assertTrue(Gdx.files.internal("auber.png").exists());
     }
+
+    @Test
+    public void spriteTest(){
+        Assert.assertTrue(Gdx.files.internal("individual_sprites/alienA.png").exists() && Gdx.files.internal("individual_sprites/alienB.png").exists());
+    }
 }

@@ -1,10 +1,7 @@
 package com.threecubed.auber;
 
 import com.badlogic.gdx.math.Vector2;
-import com.threecubed.auber.entities.Civilian;
-import com.threecubed.auber.entities.GameEntity;
-import com.threecubed.auber.entities.Infiltrator;
-import com.threecubed.auber.entities.Npc;
+import com.threecubed.auber.entities.*;
 import com.threecubed.auber.screens.GameScreen;
 import com.threecubed.auber.ui.Difficulties;
 import de.tomgrill.gdxtesting.GdxTestRunner;
@@ -90,6 +87,25 @@ public class InfiltratorTest {
                 }
             }
         }
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void abilityTest() {
+        Assert.assertTrue(Projectile.CollisionActions.values().length >= 3);
+    }
+
+    @Test
+    public void prisonTest() {
+        // Check if ai is enabled, and then if it is in prison bounds
+        Infiltrator inf = new Infiltrator(world);
+        world.queueEntityAdd(inf);
+        world.updateEntities();
+        // Expose
+        inf.handleTeleporterShot(world);
+        // and Arrest
+        inf.handleTeleporterShot(world);
+        inf.update(world);
         Assert.assertTrue(true);
     }
 }
