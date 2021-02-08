@@ -38,4 +38,14 @@ public class InfirmaryTest {
         player.update(world);
         Assert.assertNotEquals(startHealth, player.health);
     }
+
+    @Test
+    public void respawnTest() {
+        world.updateEntities();
+        player.health = -1f;
+        player.update(world);
+        world.updateEntities();
+        player.update(world);
+        Assert.assertTrue(world.medbay.getRectangle().contains(player.position.x, player.position.y));
+    }
 }

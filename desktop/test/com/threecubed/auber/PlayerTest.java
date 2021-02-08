@@ -1,5 +1,7 @@
 package com.threecubed.auber;
 
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Vector2;
 import com.threecubed.auber.entities.Civilian;
 import com.threecubed.auber.entities.GameEntity;
@@ -44,5 +46,21 @@ public class PlayerTest {
         GameScreen newGS = new GameScreen(newGame, Difficulties.Easy);
         World newWorld = newGS.world;
         Assert.assertEquals(newWorld.player.position, world.player.position);
+    }
+
+    @Test
+    public void telepadTest() {
+        int telepadCount = 0;
+        MapObjects objs = World.map.getLayers().get("object_layer").getObjects();
+        for (MapObject mo : objs) {
+            System.out.println(mo.getName());
+            if (mo.getName() == null) {
+                // null
+            }
+            else if (mo.getName().contains("Teleport")) {
+                telepadCount++;
+            }
+        }
+        Assert.assertEquals(3, telepadCount);
     }
 }
