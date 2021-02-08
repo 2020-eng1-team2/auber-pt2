@@ -92,7 +92,9 @@ public class Infiltrator extends Npc {
     if (!exposed) {
       exposed = true;
       fireProjectileAtPlayer(world);
-      sprite = world.atlas.createSprite("infiltrator");
+      if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop) {
+        sprite = world.atlas.createSprite("infiltrator");
+      }
       state = States.FLEEING;
       navigateToFurthestPointFromPlayer(world);
       npcTimer.scheduleTask(new Task() {

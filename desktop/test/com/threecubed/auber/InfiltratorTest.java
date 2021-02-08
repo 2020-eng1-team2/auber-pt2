@@ -106,6 +106,8 @@ public class InfiltratorTest {
         // and Arrest
         inf.handleTeleporterShot(world);
         inf.update(world);
-        Assert.assertTrue(true);
+        Assert.assertTrue(inf.aiEnabled == false && inf.position.x >= World.BRIG_BOUNDS[0][0]
+                && inf.position.y >= World.BRIG_BOUNDS[0][1] && inf.position.x <= World.BRIG_BOUNDS[1][0]
+                && inf.position.y <= World.BRIG_BOUNDS[1][1]);
     }
 }
